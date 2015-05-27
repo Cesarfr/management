@@ -27,7 +27,6 @@ $_SESSION['ref_script']=$currentPage;
 
 ?>
 
-
 <table class="headerTable" style='text-align:left;'>
 <tr>
 <td>
@@ -60,13 +59,8 @@ $_SESSION['ref_script']=$currentPage;
 			?>
 
 			</select>
-
 			</div>
-
 			<div class="right-element" id='div_Qualifiers'>
-
-
-
 			<?php
 			if (count($qualifierArray) > 0 ) {
 			?>
@@ -96,12 +90,7 @@ $_SESSION['ref_script']=$currentPage;
 
 		</div>
 	</div>
-
-	<div id='div_list'>
-
-	</div>
-
-
+	<div id='div_list'></div>
 </td>
 </tr>
 </table>

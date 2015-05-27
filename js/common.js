@@ -30,14 +30,11 @@
   }
 })(jQuery)
 
-
-
 //Required for date picker
 Date.firstDayOfWeek = 0;
 
 //suggested: mm/dd/yyyy OR dd-mm-yyyy
 Date.format = 'mm/dd/yyyy';
-
 
 $(function(){
 	loadDatePicker();
@@ -69,7 +66,6 @@ $(function(){
 		
 	 });
 	 
-	 
 	 //for the Change Module drop down
 	 $('.coraldropdown').each(function () {
 		$(this).parent().eq(0).hover(function () {
@@ -84,7 +80,6 @@ function loadDatePicker() {
 	$('.date-pick').datePicker({startDate:'01/01/1996'});
 }
 
-
 // 1 visible, 0 hidden
 function toggleDivState(divID, intDisplay) {
 	if(document.layers){
@@ -98,8 +93,6 @@ function toggleDivState(divID, intDisplay) {
 		document.all[divID].style.display = intDisplay ? "block" : "none";
 	}
 }
-
-
 
 function getCheckboxValue(field){
 	if ($('#' + field + ':checked').attr('checked')) {
@@ -121,8 +114,6 @@ function validateRequired(field,alerttxt){
 	    return true;
 	  }
 }
-
-
 
 function validateDate(field,alerttxt) {
      $("#span_error_" + field).html('');
@@ -152,8 +143,6 @@ function validateDate(field,alerttxt) {
      
      return true;
 }
-
-
 
 function thickboxResize() {  
   
@@ -189,12 +178,9 @@ function thickboxResize() {
 	    
      }
 }  
-  
 
 $(window).bind('load', thickboxResize );  
 $(window).bind('resize', thickboxResize );  
-
-
 
 function postwith (to,p) {
   var myForm = document.createElement("form");
@@ -210,8 +196,6 @@ function postwith (to,p) {
   myForm.submit() ;
   document.body.removeChild(myForm) ;
 }
-
-
 
 //This prototype is provided by the Mozilla foundation and
 //is distributed under the MIT license.

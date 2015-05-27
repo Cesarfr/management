@@ -35,7 +35,6 @@ switch ($_GET['action']) {
 	case 'getLicenseHead':
 		$licenseID = $_GET['licenseID'];
 		$license = new License(new NamedArguments(array('primaryKey' => $licenseID)));
-//		$consortium = new Consortium(new NamedArguments(array('primaryKey' => $license->consortiumID)));
 		?>
 
 		<table class="headerTable">
@@ -81,7 +80,6 @@ switch ($_GET['action']) {
 				echo "<br />" . $license->getConsortiumName();
 			}
 		}
-//		echo "Category:  " . $license->getConsortiumName();
 		echo "<br />"._("Creation Date:  ") . format_date($license->createDate())." ({$license->createLoginID})";
 		echo "<br />"._("Last Update:  ") . format_date($license->statusDate())." ({$license->statusLoginID})";
 		
@@ -380,7 +378,6 @@ switch ($_GET['action']) {
 		if ($consortiumID == "0") {
 			$whereAdd[] = " L.consortiumID IS NULL ";
 		}else{
-//			if ($consortiumID <> "") $whereAdd[] = " L.consortiumID = '" . $consortiumID . "'";
 			if ($consortiumID <> "") {
 				$whereAdd[] = " lc.`consortiumID`={$consortiumID}";
 			}
@@ -476,7 +473,6 @@ switch ($_GET['action']) {
 			<table class='dataTable' style='width:727px'>
 			<tr>
 			<th style="width:60%"><table class='noBorderTable'><tr><td><?php echo _("Name");?></td><td class='arrow'><a href='javascript:setOrder("L.shortName","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("L.shortName","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
-<!--			<th><table class='noBorderTable'><tr><td>Publisher / Provider</td><td class='arrow'><a href='javascript:setOrder("providerName","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("providerName","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th> -->
 			<th style="width:15%"><table class='noBorderTable'><tr><td><?php echo _("Type");?></td><td class='arrow'><a href='javascript:setOrder("DT.shortName","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("DT.shortName","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
 			<th style="width:25%"><table class='noBorderTable'><tr><td><?php echo _("Last Document Revision");?></td><td class='arrow'><a href='javascript:setOrder("D.revisionDate","asc");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:setOrder("D.revisionDate","desc");'><img src='images/arrowdown.gif' border=0></a></td></tr></table></th>
 			</tr>
@@ -788,23 +784,12 @@ switch ($_GET['action']) {
 			}
 
 			echo "</table>";
-
-
-
-
-
 		#end expression type loop
 		}
 
-
 		echo "</table>";
 		break;
-
-
-
-
-
-
+    
 	//display table for all documents for the license on license.php
 	case 'getAllDocuments':
 
@@ -865,12 +850,10 @@ switch ($_GET['action']) {
 		<th><table class='noBorderTable'><tr><td style='background-color: #e5ebef'><?php echo _("Name");?></td><td class='arrow' style='background-color: #e5ebef'><a href='javascript:setParentOrder("D.shortName","asc");'><img src='images/arrowup<?php if ($parentOrderBy == 'D.shortName asc') echo "_sel"; ?>.gif' border=0></a>&nbsp;<a href='javascript:setParentOrder("D.shortName","desc");'><img src='images/arrowdown<?php if ($parentOrderBy == 'D.shortName desc') echo "_sel"; ?>.gif' border=0></a></td></tr></table></th>
 		<th><table class='noBorderTable'><tr><td style='background-color: #e5ebef'><?php echo _("Type");?></td><td class='arrow' style='background-color: #e5ebef'><a href='javascript:setParentOrder("DT.shortName","asc");'><img src='images/arrowup<?php if ($parentOrderBy == 'DT.shortName asc') echo "_sel"; ?>.gif' border=0></a>&nbsp;<a href='javascript:setParentOrder("DT.shortName","desc");'><img src='images/arrowdown<?php if ($parentOrderBy == 'DT.shortName desc') echo "_sel"; ?>.gif' border=0></a></td></tr></table></th>
 		<th style='width:25%;'><table class='noBorderTable'><tr><td style='background-color: #e5ebef'><?php echo _("Last Document Revision");?></td><td class='arrow' style='background-color: #e5ebef'><a href='javascript:setParentOrder("D.effectiveDate","asc");'><img src='images/arrowup<?php if ($parentOrderBy == 'D.effectiveDate asc') echo "_sel"; ?>.gif' border=0></a>&nbsp;<a href='javascript:setParentOrder("D.effectiveDate","desc");'><img src='images/arrowdown<?php if ($parentOrderBy == 'D.effectiveDate desc') echo "_sel"; ?>.gif' border=0></a></td></tr></table></th>
-<!--		<th style='width:180px;'><table class='noBorderTable'><tr><td style='background-color: #e5ebef'>Signatures</td><td class='arrow' style='background-color: #e5ebef'><a href='javascript:setParentOrder("min(signatureDate) asc, min(signerName)","asc");'><img src='images/arrowup<?php if ($parentOrderBy == 'min(signatureDate) asc, min(signerName) asc') echo "_sel"; ?>.gif' border=0></a>&nbsp;<a href='javascript:setParentOrder("max(signatureDate) desc, max(signerName)","desc");'><img src='images/arrowdown<?php if ($parentOrderBy == 'max(signatureDate) desc, max(signerName) desc') echo "_sel"; ?>.gif' border=0></a></td></tr></table></th> -->
 		<?php }else{ ?>
 		<th><table class='noBorderTable'><tr><td style='background-color: #e5ebef'><?php echo _("Name");?></td><td class='arrow' style='background-color: #e5ebef'><a href='javascript:setParentArchivedOrder("D.shortName","asc");'><img src='images/arrowup<?php if ($parentArchivedOrderBy == 'D.shortName asc') echo "_sel"; ?>.gif' border=0></a>&nbsp;<a href='javascript:setParentArchivedOrder("D.shortName","desc");'><img src='images/arrowdown<?php if ($parentArchivedOrderBy == 'D.shortName desc') echo "_sel"; ?>.gif' border=0></a></td></tr></table></th>
 		<th><table class='noBorderTable'><tr><td style='background-color: #e5ebef'><?php echo _("Type");?></td><td class='arrow' style='background-color: #e5ebef'><a href='javascript:setParentArchivedOrder("DT.shortName","asc");'><img src='images/arrowup<?php if ($parentArchivedOrderBy == 'DT.shortName asc') echo "_sel"; ?>.gif' border=0></a>&nbsp;<a href='javascript:setParentArchivedOrder("DT.shortName","desc");'><img src='images/arrowdown<?php if ($parentArchivedOrderBy == 'DT.shortName desc') echo "_sel"; ?>.gif' border=0></a></td></tr></table></th>
 		<th style='width:25%;'><table class='noBorderTable'><tr><td style='background-color: #e5ebef'><?php echo _("Last Document Revision");?></td><td class='arrow' style='background-color: #e5ebef'><a href='javascript:setParentArchivedOrder("D.effectiveDate","asc");'><img src='images/arrowup<?php if ($parentArchivedOrderBy == 'D.effectiveDate asc') echo "_sel"; ?>.gif' border=0></a>&nbsp;<a href='javascript:setParentArchivedOrder("D.effectiveDate","desc");'><img src='images/arrowdown<?php if ($parentArchivedOrderBy == 'D.effectiveDate desc') echo "_sel"; ?>.gif' border=0></a></td></tr></table></th>
-<!--		<th style='width:180px;'><table class='noBorderTable'><tr><td style='background-color: #e5ebef'>Signatures</td><td class='arrow' style='background-color: #e5ebef'><a href='javascript:setParentArchivedOrder("min(signatureDate) asc, min(signerName)","asc");'><img src='images/arrowup<?php if ($parentArchivedOrderBy == 'min(signatureDate) asc, min(signerName) asc') echo "_sel"; ?>.gif' border=0></a>&nbsp;<a href='javascript:setParentArchivedOrder("max(signatureDate) desc, max(signerName)","desc");'><img src='images/arrowdown<?php if ($parentArchivedOrderBy == 'max(signatureDate) desc, max(signerName) desc') echo "_sel"; ?>.gif' border=0></a></td></tr></table></th> -->
 		<?php } ?>
 
 
@@ -889,7 +872,6 @@ switch ($_GET['action']) {
 
 				//determine coloring of the row
 				if(($document->expirationDate != "0000-00-00") && ($document->expirationDate != "")){
-					//$classAdd="class='archive'";
 					$classAdd="";
 				}else if ((strtoupper($documentType->shortName) == 'AGREEMENT') || (strpos(strtoupper($documentType->shortName),'AGREEMENT'))){
 					$classAdd="class='agreement'";
@@ -897,13 +879,7 @@ switch ($_GET['action']) {
 					$classAdd="";
 				}
 				$numrows++;
-/*
-				if (($document->effectiveDate == "0000-00-00") || ($document->effectiveDate == "")){
-					$displayEffectiveDate = '';
-				}else{
-					$displayEffectiveDate = format_date($document->effectiveDate);
-				}
-*/
+
 				if (($document->revisionDate == "0000-00-00") || ($document->revisionDate == "")){
 					$displayRevisionDate = '';
 				}else{
@@ -921,43 +897,6 @@ switch ($_GET['action']) {
 				echo "<td $classAdd>" . $document->shortName . "</td>";
 				echo "<td $classAdd>" . $documentType->shortName . "</td>";
 				echo "<td $classAdd>" . $displayRevisionDate . "</td>";
-//				echo "<td $classAdd>";
-//
-//				$signature = array();
-//				$signatureArray = $document->getSignaturesForDisplay();
-//
-//				if (count($signatureArray) > 0){
-//					echo "<table class='noBorderTable'>";
-//
-//					foreach($signatureArray as $signature) {
-//
-//						if (($signature['signatureDate'] != '') && ($signature['signatureDate'] != "0000-00-00")) {
-//							$signatureDate = format_date($signature['signatureDate']);
-//						}else{
-//							$signatureDate='(no date)';
-//						}
-
-//						echo "<tr>";
-//						echo "<td $classAdd>" . $signature['signerName'] . "</td>";
-//						echo "<td $classAdd>" . $signatureDate . "</td>";
-//						echo "</tr>";
-//
-//					}
-//					echo "</table>";
-//					if ($user->canEdit()){
-//						echo "<a href='ajax_forms.php?action=getSignatureForm&height=270&width=460&modal=true&documentID=" . $document->documentID . "' class='thickbox' id='signatureForm'>add/view details</a>";
-//					}
-//
-
-//				}else{
-//					echo "(none found)<br />";
-//					if ($user->canEdit()){
-//						echo "<a href='ajax_forms.php?action=getSignatureForm&height=170&width=460&modal=true&documentID=" . $document->documentID . "' class='thickbox' id='signatureForm'>add signatures</a>";
-//					}
-//				}
-//
-//				echo "</td>";
-
 				echo "<td $classAdd>";
 				if (!$user->isRestricted()) {
 					if ($document->documentURL != ""){
@@ -1046,8 +985,7 @@ switch ($_GET['action']) {
 
 							if (count($signatureArray) > 0){
 								echo "<table class='noBorderTable'>";
-
-
+                                
 								foreach($signatureArray as $signature) {
 									if (($signature['signatureDate'] != '') && ($signature['signatureDate'] != "0000-00-00")) {
 										$signatureDate = format_date($signature['signatureDate']);
@@ -1092,7 +1030,6 @@ switch ($_GET['action']) {
 
 							if ($user->canEdit()){
 								echo "<td $classAdd><a href='ajax_forms.php?action=getUploadDocument&height=285&width=305&modal=true&licenseID=" . $licenseID . "&documentID=" . $childDocument->documentID . "' class='thickbox' id='editDocument'>"._("edit document")."</a><br /><a href='javascript:deleteDocument(\"" . $childDocument->documentID . "\");'>"._("remove document")."</a>";
-								//echo "<br />" . $displayExpirationDate . "</td>";
 							}
 							echo "</tr>";
 
@@ -1114,8 +1051,6 @@ switch ($_GET['action']) {
 					}
 				//end number of children if
 				}
-
-
 			//end loop over document records
 			}
 			?>
@@ -1144,22 +1079,15 @@ switch ($_GET['action']) {
 			}
 			echo '<br /><br />';
 		}
-
-
+    
 		break;
-
-
-
-
-
+    
 	//display for expressions tab on license.php
 	case 'getAllExpressions':
 
 		$licenseID = $_GET['licenseID'];
 		$documentID = $_GET['documentID'];
-
-
-
+    
 		//if 'view expressions' link is clicked on a specific document, we're just displaying expressions for that document
 		//otherwise we're displaying expressions for all un-archived documents
 		if ($documentID != ''){
@@ -1171,9 +1099,7 @@ switch ($_GET['action']) {
 		}
 
 		$util = new Utility();
-
-
-
+    
 		$numRows = count($documentArray);
 
 		if ($numRows > 0){
@@ -1197,15 +1123,12 @@ switch ($_GET['action']) {
 				</tr>
 
 				<?php
-
-
-
+                
 				$expressionArray = $documentObj->getExpressionsForDisplay();
 
 				foreach($expressionArray as $expressionIns) {
 					$expression = new Expression(new NamedArguments(array('primaryKey' => $expressionIns['expressionID'])));
-
-
+                    
 					//get qualifiers set up for this expression
 					$sanitizedInstance = array();
 					$instance = new Qualifier();
@@ -1290,8 +1213,7 @@ switch ($_GET['action']) {
 					}else{
 						echo "<tr><td colspan='2'>&nbsp;</td></tr>";
 					}
-
-
+                    
 				}
 				?>
 
@@ -1308,10 +1230,7 @@ switch ($_GET['action']) {
 			echo "<br /><br /><a href='ajax_forms.php?action=getExpressionForm&licenseID=" . $licenseID . "&height=420&width=345&modal=true' class='thickbox' id='expression'>"._("add new expression")."</a>";
 		}
 		break;
-
-
-
-
+    
 	//generic admin data (lookup table) display - all tables have ID and shortName so we can simplify retrieving this data
 	case 'getAdminList':
 		$className = $_GET['tableName'];
@@ -1338,8 +1257,7 @@ switch ($_GET['action']) {
 			echo _("(none found)");
 		}
 		break;
-
-
+    
 	//display user info for admin screen
 	case 'getAdminUserList':
 
@@ -1434,19 +1352,10 @@ switch ($_GET['action']) {
 		}
 
 		break;
-
-
-
-
-
+    
 	//display qualifier list for admin screen - needs its own display because of expression type
 	case 'getQualifierList':
-
-
-
-		$expressionType = new ExpressionType();
-
-
+        $expressionType = new ExpressionType();
 		?>
 		<table class='dataTable' style='width:400px'>
 			<tr>
@@ -1474,14 +1383,10 @@ switch ($_GET['action']) {
 			?>
 		</table>
 		<?php
-
 		break;
-
-
-
+    
 	//display qualifier dropdown - for the search (index.php)
 	case 'getQualifierDropdownHTML':
-
 
 		if (isset($_GET['expressionTypeID'])){
 			$selectedValue = '';
@@ -1512,15 +1417,11 @@ switch ($_GET['action']) {
 					}else{
 						echo "<option value='" . $qualifier->qualifierID . "'>" . $qualifier->shortName . "</option>\n";
 					}
-
 				}
-
 				?>
 				</select>
-
 			<?php
 			}
-
 		}
 
 		break;
@@ -1563,16 +1464,9 @@ switch ($_GET['action']) {
 		}
 
 		break;
-
-
-
 	default:
        echo _("Action ") . $action . _(" not set up!");
        break;
-
-
 }
-
-
 
 ?>

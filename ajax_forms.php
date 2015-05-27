@@ -76,16 +76,7 @@ switch ($_GET['action']) {
 					</tr>
 					<input type='hidden' id='licenseOrganizationID' name='licenseOrganizationID' value='<?php echo '0'; ?>'>		
 					<input type='hidden' id='organizationName' name='organizationName' value='<?php echo 'Default Internal'; ?>'>		
-<!--
-		<tr>
-		<td colspan='2'><label for="licenseOrganizationID" class="formText">Publisher / Provider:</label>  <span id='span_error_organizationName' class='errorText'></span><br />
-		<input type='textbox' id='organizationName' name='organizationName' value="<?php echo $organizationName; ?>" style='width:232px;' />
-		<input type='hidden' id='licenseOrganizationID' name='licenseOrganizationID' value='<?php echo $license->organizationID; ?>'>
-		<span id='span_error_organizationNameResult' class='errorText'></span>
-		<br />
-		</td>
-		</tr>
--->
+
 <?php 
 		//if not editing
 		if (!$licenseID){
@@ -336,42 +327,6 @@ switch ($_GET['action']) {
 		<br />
 		</td>
 		</tr>
-
-<!--
-
-		<tr>
-		<td style='text-align:right;vertical-align:top;'><label for="documentType" class="formText">Parent:</label></td>
-		<td>
-		<div>
-		<select name='parentDocumentID' id='parentDocumentID' style='width:185px;'>
-		<option value=''></option>
-		<?php
-
-		$display = array();
-
-		foreach($license->getDocuments() as $display) {
-			if ($document->parentDocumentID == $display->documentID) {
-				echo "<option value='" . $display->documentID . "' selected>" . $display->shortName . "</option>";
-			}else if ($document->documentID != $display->documentID) {
-				echo "<option value='" . $display->documentID . "'>" . $display->shortName . "</option>";
-			}
-		}
-
-		foreach($license->getArchivedDocuments() as $display) {
-			if ($document->parentDocumentID == $display->documentID) {
-				echo "<option value='" . $display->documentID . "' selected>" . $display->shortName . "</option>";
-			}else if ($document->documentID != $display->documentID) {
-				echo "<option value='" . $display->documentID . "'>" . $display->shortName . "</option>";
-			}
-		}
-
-		?>
-		</select>
-		</div>
-		</td>
-		</tr>
-
--->		
 		
 		<tr>
 		<td style='text-align:right;vertical-align:top;'><label for="shortName" class="formText"><?php echo _("Name:");?></label><br /><span id='span_error_shortName' class='errorText'></span></td>

@@ -24,9 +24,5 @@ $(document).ready(function(){
          cache:      false,
          data:       "action=getInProgressLicenses",
          success:    function(html) { $('#div_licenses').html(html);  }
-
-
      });
-     
 });
- 

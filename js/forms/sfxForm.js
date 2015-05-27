@@ -18,51 +18,46 @@
 
 $(function(){
 
-	//perform search if enter is hit
-	$('#shortName').keyup(function(e) {
-	      if(e.keyCode == 13) {
-		submitSFXForm();
-	      }
-	});
-
-
+    //perform search if enter is hit
+    $('#shortName').keyup(function(e) {
+        if(e.keyCode == 13) {
+            submitSFXForm();
+        }
+    });
 });
 
-
-
 $("#submitSFX").click(function () {
-	submitSFXForm();
+    submitSFXForm();
 });
 
 function submitSFXForm(){
-	if (validateForm() === true) {
-	  $.ajax({
-		 type:       "POST",
-		 url:        "ajax_processing.php?action=submitSFXProvider",
-		 cache:      false,
-		 data:       { providerID: $("#sfxProviderID").val(), documentID: $("#documentID").val(), shortName: $("#shortName").val() },
-		 success:    function(html) {
-			if (html){
-				$("#span_errors").html(html);
-			}else{
-				window.parent.tb_remove();
-				window.parent.updateSFXProviders();
-				return false;
-			}
-		 }
-	 });
-	}   
+    if (validateForm() === true) {
+        $.ajax({
+            type:       "POST",
+            url:        "ajax_processing.php?action=submitSFXProvider",
+            cache:      false,
+            data:       { providerID: $("#sfxProviderID").val(), documentID: $("#documentID").val(), shortName: $("#shortName").val() },
+            success:    function(html) {
+                if (html){
+                    $("#span_errors").html(html);
+                }else{
+                    window.parent.tb_remove();
+                    window.parent.updateSFXProviders();
+                    return false;
+                }
+            }
+        });
+    }   
 }
 
 function validateForm (){
-	myReturn=0;
-	if (!validateRequired('documentID','<br />'+_("A document must be selected to continue."))) myReturn="1";
-	if (!validateRequired('shortName','<br />'+_("Terms Tool Resource must be entered to continue."))) myReturn="1";
+    myReturn=0;
+    if (!validateRequired('documentID','<br />'+_("A document must be selected to continue."))) myReturn="1";
+    if (!validateRequired('shortName','<br />'+_("Terms Tool Resource must be entered to continue."))) myReturn="1";
 
-
-	if (myReturn == "1"){
-		return false; 	
-	}else{
-		return true;
-	}
+    if (myReturn == "1"){
+        return false; 	
+    }else{
+        return true;
+    }
 }

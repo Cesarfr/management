@@ -52,11 +52,6 @@ $pageTitle=_('Not Available');
 </tr>
 </table>
 
-
-
-
-
-
 <table class="headerTable">
 <tr><td>
 <?php
@@ -69,13 +64,8 @@ if ($_GET['errorMessage']){
 
 </td></tr>
 </table>
-
-<br />
-<br />
-<br />
+<br /><br /><br />
 </div>
-
-
 </td>
 </tr>
 </table>

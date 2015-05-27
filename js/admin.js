@@ -32,9 +32,6 @@
       
  });
 
-
-
-
  function updateForm(tableName){
 
        $.ajax({
@@ -46,12 +43,7 @@
           	tb_reinit();
           }
       });
-      
-      
-
-
  }
-
 
  function updateUserList(){
 
@@ -67,9 +59,7 @@
   
       
  }
- 
- 
- 
+
   function updateExpressionTypeList(){
  
         $.ajax({
@@ -83,9 +73,7 @@
        });
        
   }
- 
- 
-  
+
    function updateQualifierList(){
   
          $.ajax({
@@ -154,10 +142,6 @@
 
  }
 
-
-
-
-
  function submitUserData(orgLoginID){
 	$.ajax({
           type:       "POST",
@@ -172,8 +156,6 @@
 
  }
 
-
-
  function submitExpressionType(){
 	$.ajax({
           type:       "POST",
@@ -187,10 +169,6 @@
        });
 
  }
-
-
-
-
 
  function submitQualifier(){
  	$("#submitQualifier").attr("disabled","disabled");
@@ -231,7 +209,6 @@
 	}
  }
  
-
  function deleteUser(loginID){
  
  	if (confirm(_("Do you really want to delete this user?")) == true) {
@@ -255,8 +232,6 @@
 
 	}
  }
-
-
 
  function deleteExpressionType(deleteID){
  
@@ -282,8 +257,6 @@
 
 	}
  }
- 
-
 
  function deleteQualifier(deleteID){
  
@@ -308,8 +281,7 @@
 
 	}
  }
-  
- 
+
 function showAdd(tableName){
        $('#span_new' + tableName).html("<input type='text' name='new" + tableName + "' id='new" + tableName + "' class='adminAddInput' />  <a href='javascript:addData(\"" + tableName + "\");'>"+_("add")+"</a>");
 
@@ -320,11 +292,8 @@ function showAdd(tableName){
                	   addData(tableName);
                }
         });
-
 }
-
 
 function emptyResponse(tableName){
 	$('#span_' + tableName + "_response").html("");
 }
-

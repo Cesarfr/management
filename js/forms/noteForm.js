@@ -18,54 +18,52 @@
 
 $("#submitNote").click(function () {
 
-  $.ajax({
-	 type:       "POST",
-	 url:        "ajax_processing.php?action=submitNote",
-	 cache:      false,
-	 async:      false,
-	 data:       { documentNoteID: $("#documentNoteID").val(), licenseID: $("#licenseID").val(), body: $("#notebody").val(), documentNoteTypeID: $("#documentNoteTypeID").val(), documentID: $("#documentID").val() } ,
-	 success:    function(html) {
-		window.parent.tb_remove();
-		window.parent.updateNotes();
-		return false;
-	 }
-   });
-   return false;
+    $.ajax({
+        type:       "POST",
+        url:        "ajax_processing.php?action=submitNote",
+        cache:      false,
+        async:      false,
+        data:       { documentNoteID: $("#documentNoteID").val(), licenseID: $("#licenseID").val(), body: $("#notebody").val(), documentNoteTypeID: $("#documentNoteTypeID").val(), documentID: $("#documentID").val() } ,
+        success:    function(html) {
+            window.parent.tb_remove();
+            window.parent.updateNotes();
+            return false;
+        }
+    });
+    return false;
 });
 
 function newNoteType(){
-  $('#span_newNoteType').html("<input type='text' name='newNoteType' id='newNoteType' class='licenseAddInput' />  <a href='javascript:addNoteType();'>"+_("add")+"</a>");
+    $('#span_newNoteType').html("<input type='text' name='newNoteType' id='newNoteType' class='licenseAddInput' />  <a href='javascript:addNoteType();'>"+_("add")+"</a>");
 
-	 //attach enter key event to new input and call add data when hit
-	 $('#span_newNoteType').keyup(function(e) {
+    //attach enter key event to new input and call add data when hit
+    $('#span_newNoteType').keyup(function(e) {
 
-			 if(e.keyCode == 13) {
-				   addDocumentType();
-			 }
-	 });
+        if(e.keyCode == 13) {
+            addDocumentType();
+        }
+    });
 }
 
 function addNoteType(){
-  //check for duplicates
-  $.ajax({
-	 type:       "POST",
-	 url:        "ajax_processing.php?action=checkForDuplicates",
-	 cache:      false,
-	 data:       { shortName: $("#newNoteType").val(), newType: "DocumentNoteType" },
-	 success:    function(data) {
-					if (data == "1") {
-					  $.ajax({
-						 type:       "GET",
-						 url:        "ajax_processing.php",
-						 cache:      false,
-						 data:       "action=addNoteType&shortName=" + $("#newNoteType").val(),
-						 success:    function(html) { $('#span_noteType').html(html); $('#span_newNoteType').html("<font color='red'>"+_("Note Type has been added")+"</font>"); }
-						});
-					} else {
-						alert(_("That Note Type is already in use."));
-					}
-	 			}
- 	});
+    //check for duplicates
+    $.ajax({
+        type:       "POST",
+        url:        "ajax_processing.php?action=checkForDuplicates",
+        cache:      false,
+        data:       { shortName: $("#newNoteType").val(), newType: "DocumentNoteType" },
+        success:    function(data) {
+            if (data == "1") {
+                $.ajax({
+                    type:       "GET",
+                    url:        "ajax_processing.php",
+                    cache:      false,
+                    data:       "action=addNoteType&shortName=" + $("#newNoteType").val(),
+                    success:    function(html) { $('#span_noteType').html(html); $('#span_newNoteType').html("<font color='red'>"+_("Note Type has been added")+"</font>"); }
+                });
+            } else {
+                alert(_("That Note Type is already in use."));
+            }
+        }
+    });
 }
-
-

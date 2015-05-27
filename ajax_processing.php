@@ -40,8 +40,6 @@ switch ($_GET['action']) {
 			}else if ($_POST['archiveInd'] == "0"){
 				$document->expirationDate = '';
 			}
-
-
     	}else{
  			$document = new Document();
  			$document->documentID = '';
@@ -65,7 +63,6 @@ switch ($_GET['action']) {
 			$document->revisionDate = date("Y-m-d", strtotime($_POST['revisionDate']));
 		}
 
-
 		$document->shortName=$_POST['shortName'];
 		$document->documentTypeID=$_POST['documentTypeID'];
 		$document->parentDocumentID=$_POST['parentDocumentID'];
@@ -85,8 +82,6 @@ switch ($_GET['action']) {
 
         break;
 
-
-
     case 'deleteLicense':
 
 		//note: does not delete physical documents
@@ -105,7 +100,6 @@ switch ($_GET['action']) {
 
 		break;
 
-
 	//archives (expires) document - defaults to current date/time
     case 'archiveDocument':
 		$document = new Document(new NamedArguments(array('primaryKey' => $_GET['documentID'])));
@@ -118,7 +112,6 @@ switch ($_GET['action']) {
 		}
 
         break;
-
 
 	//verify that the new document name doesn't have bad characters and the name isn't already being used
     case 'checkUploadDocument':
@@ -142,12 +135,10 @@ switch ($_GET['action']) {
 					$exists++;
 				}
 			}
-
 			echo $exists;
 		}
 
 		break;
-
 
 	//performs document upload
     case 'uploadDocument':
@@ -190,8 +181,7 @@ switch ($_GET['action']) {
 		//note - does not delete physical document
 
 		$document = new Document(new NamedArguments(array('primaryKey' => $_GET['documentID'])));
-
-
+    
 		//delete children sfx providers
 		$sfxProvider = new SFXProvider();
 		foreach ($document->getSFXProviders() as $sfxProvider) {
@@ -212,8 +202,6 @@ switch ($_GET['action']) {
 
 		break;
 
-
-
     case 'submitSignature':
     	//set date for proper saving
         if ((isset($_POST['signatureDate'])) && ($_POST['signatureDate'] != '')){
@@ -230,7 +218,6 @@ switch ($_GET['action']) {
  			$signature->signatureID = '';
  		}
 
-
 		$signature->signerName		= $_POST['signerName'];
 		$signature->signatureTypeID = $_POST['signatureTypeID'];
 		$signature->documentID		= $_POST['documentID'];
@@ -244,8 +231,7 @@ switch ($_GET['action']) {
 		}
 
 		break;
-
-
+    
     case 'deleteSignature':
 
 		$signature = new Signature(new NamedArguments(array('primaryKey' => $_GET['signatureID'])));
@@ -298,16 +284,13 @@ switch ($_GET['action']) {
 					$expressionQualifierProfile->save();
 				}
 			}
-
-
-
+            
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
 
         break;
-
-
+    
     case 'deleteExpression':
 
 		$expression = new Expression(new NamedArguments(array('primaryKey' => $_GET['expressionID'])));
@@ -409,7 +392,6 @@ switch ($_GET['action']) {
 		echo $expressionNote->reorder($_GET['direction'], $_GET['oldSeq']);
 
  		break;
-
 
      case 'deleteExpressionNote':
 
@@ -515,8 +497,7 @@ switch ($_GET['action']) {
 					if ((isset($_POST['revisionDate'])) && ($_POST['revisionDate'] != '')) {
 						$document->revisionDate = date("Y-m-d", strtotime($_POST['revisionDate']));
 					}
-
-
+                    
 					$document->shortName=$_POST['shortName'];
 					$document->documentTypeID=$_POST['documentTypeID'];
 					$document->parentDocumentID=$_POST['parentDocumentID'];
@@ -765,11 +746,7 @@ switch ($_GET['action']) {
 				echo $e->getMessage();
 			}
 		} 
-/*
-<select name="note[documentNoteTypeID]" id="noteDocumentNoteTypeID">
-			<option value="1">Test Type 1</option>
-			<option value="2">Test Type 2</option>			<option value="3">Test Type 3</option>			<option value="4">Test Type 4</option>			</select>
-*/		
+    
 			echo '			<select id="noteDocumentNoteTypeID" name="note[documentNoteTypeID]">';
 			foreach($noteType->allAsArray() as $display) {
 				echo "			<option value='" . $display['documentNoteTypeID'] . "'>" . $display['shortName'] . "</option>";
@@ -981,12 +958,9 @@ switch ($_GET['action']) {
 		} catch (Exception $e) {
 			echo $e->POSTMessage();
 		}
-
-
+    
  		break;
-
-
-
+    
      case 'deleteUser':
 
  		$loginID = $_GET['loginID'];
@@ -1002,10 +976,7 @@ switch ($_GET['action']) {
 		echo "</font>";
 
  		break;
-
-
-
-
+    
      case 'deleteExpressionType':
 
  		$expressionTypeID = $_GET['expressionTypeID'];
@@ -1021,9 +992,7 @@ switch ($_GET['action']) {
 		echo "</font>";
 
  		break;
-
-
-
+    
 	//verify file name for uploaded attachments (4th tab) aren't already being used
     case 'checkUploadAttachment':
 
@@ -1078,8 +1047,7 @@ switch ($_GET['action']) {
 			  echo "<div id=\"error\">"._("There was a problem saving your file to ").$target_path.".</div>";
 			}
 		}
-
-
+    
 		break;
 
 	//add/update for attachment - 4th tab
@@ -1109,11 +1077,9 @@ switch ($_GET['action']) {
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
-
-
+    
         break;
-
-
+    
 	//adding the attachment file to the db - saves the URL to it only
     case 'addAttachmentFile':
 
@@ -1148,8 +1114,7 @@ switch ($_GET['action']) {
 		}
 
  		break;
-
-
+    
      case 'deleteAttachmentFile':
 
  		$attachmentFile = new AttachmentFile(new NamedArguments(array('primaryKey' => $_GET['attachmentFileID'])));
@@ -1175,8 +1140,7 @@ switch ($_GET['action']) {
 		}
 
  		break;
-
-
+    
 	//add/update for note
     case 'submitNote':
     	//if noteID is sent then this is an update
@@ -1193,8 +1157,7 @@ switch ($_GET['action']) {
 		$note->licenseID 	= $_POST['licenseID'];
 		$note->documentNoteTypeID 	= $_POST['documentNoteTypeID'];
 		$note->documentID 	= $_POST['documentID'];
-
-
+    
 		try {
 			$note->save();
 			echo $note->primaryKey;
@@ -1241,10 +1204,7 @@ switch ($_GET['action']) {
 		echo implode("\n", $signerArray);
 
 		break;
-
-
-
-
+    
 	//used for autocomplete of provider names (from organizations module)
     case 'getOrganizations':
 
@@ -1261,15 +1221,13 @@ switch ($_GET['action']) {
 		echo implode("\n", $orgArray);
 
 		break;
-
-
+    
 	//used to verify document name isn't already being used as it's added
 	case 'getExistingDocumentName':
 		$shortName = $_GET['shortName'];
 
 		if (isset($_GET['documentID'])) $documentID = $_GET['documentID']; else $documentID='';
-
-
+    
 		$document = new Document();
 		$documentArray = array();
 
@@ -1288,8 +1246,7 @@ switch ($_GET['action']) {
 	//used to verify license name isn't already being used as it's added
 	case 'getExistingLicenseName':
 		$shortName = $_GET['shortName'];
-
-
+    
 		$license = new License();
 		$licenseArray = array();
 
@@ -1304,13 +1261,11 @@ switch ($_GET['action']) {
 		echo $exists;
 
 		break;
-
-
+    
 	//used to verify organization name isn't already being used as it's added
 	case 'getExistingOrganizationName':
 		$shortName = $_GET['shortName'];
-
-
+    
 		$license = new License();
 		$licenseArray = array();
 
@@ -1321,7 +1276,7 @@ switch ($_GET['action']) {
 				$exists = $orgArray['organizationID'];
 			}
 		}
-
+    
 		echo $exists;
 
 		break;
@@ -1329,10 +1284,5 @@ switch ($_GET['action']) {
 	default:
        echo _("Action ") . $action . _(" not set up!");
        break;
-
-
 }
-
-
-
 ?>

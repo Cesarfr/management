@@ -15,17 +15,9 @@
 **************************************************************************************************************************
 */
 
-
-
 $(function(){
-
-	$('#fieldsetEmail *').tooltip({
-		extraClass: "pretty"
-	});
-	
-	
-	$('#fieldsetPrivilege *').tooltip();
-	
-	
+    $('#fieldsetEmail *').tooltip({
+        extraClass: "pretty"
+    });
+    $('#fieldsetPrivilege *').tooltip();
 });
-

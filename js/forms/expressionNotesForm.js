@@ -14,88 +14,68 @@
 **
 **************************************************************************************************************************
 */
- 
-
 
 function addExpressionNote(){
 
-  $.ajax({
-	 type:       "POST",
-	 url:        "ajax_processing.php?action=submitExpressionNote",
-	 cache:      false,
-	 data:       { expressionNote: $("#expressionNote").val(), expressionID: $("#expressionID").val(), displayOrderSeqNumber: $("#displayOrderSeqNumber").val() } ,
-	 success:    function(response) {
-		updateExpressionNoteForm();
-	 }
-
-
- });
+    $.ajax({
+        type:       "POST",
+        url:        "ajax_processing.php?action=submitExpressionNote",
+        cache:      false,
+        data:       { expressionNote: $("#expressionNote").val(), expressionID: $("#expressionID").val(), displayOrderSeqNumber: $("#displayOrderSeqNumber").val() } ,
+        success:    function(response) {
+            updateExpressionNoteForm();
+        }
+    });
 }
 
 $("#commitUpdate").click(function () {
 
-  $.ajax({
-	 type:       "POST",
-	 url:        "ajax_processing.php?action=submitExpressionNote",
-	 cache:      false,
-	 data:       { expressionNote: $("#expressionNote").val(), expressionNoteID: $("#expressionNoteID").val(), displayOrderSeqNumber: $("#displayOrderSeqNumber").val() },
-	 success:    function(response) {
-		updateExpressionNoteForm();
-	 }
-
-
- });
+    $.ajax({
+        type:       "POST",
+        url:        "ajax_processing.php?action=submitExpressionNote",
+        cache:      false,
+        data:       { expressionNote: $("#expressionNote").val(), expressionNoteID: $("#expressionNoteID").val(), displayOrderSeqNumber: $("#displayOrderSeqNumber").val() },
+        success:    function(response) {
+            updateExpressionNoteForm();
+        }
+    });
 });
-
 
 function updateExpressionNoteForm(expressionNoteID){
 
-  $.ajax({
-	 type:       "GET",
-	 url:        "ajax_forms.php",
-	 cache:      false,
-	 data:       "action=getExpressionNotesForm&expressionID=" + $("#expressionID").val() + "&expressionNoteID=" + expressionNoteID + "&org=" + $("#org").val(),
-	 success:    function(html) {
-		$("#div_expressionNotesForm").html(html);
-	 }
-
-
- });
-
+    $.ajax({
+        type:       "GET",
+        url:        "ajax_forms.php",
+        cache:      false,
+        data:       "action=getExpressionNotesForm&expressionID=" + $("#expressionID").val() + "&expressionNoteID=" + expressionNoteID + "&org=" + $("#org").val(),
+        success:    function(html) {
+            $("#div_expressionNotesForm").html(html);
+        }
+    });
 }
-
-
 
 function removeExpressionNote(expressionNoteID){
 
-  $.ajax({
-	 type:       "GET",
-	 url:        "ajax_processing.php",
-	 cache:      false,
-	 data:       "action=deleteExpressionNote&expressionNoteID=" + expressionNoteID,
-	 success:    function(html) {
-		updateExpressionNoteForm();
-	 }
-
-
- });
-
+    $.ajax({
+        type:       "GET",
+        url:        "ajax_processing.php",
+        cache:      false,
+        data:       "action=deleteExpressionNote&expressionNoteID=" + expressionNoteID,
+        success:    function(html) {
+            updateExpressionNoteForm();
+        }
+    });
 }
-
-
 
 function reorder(expressionNoteID, oldSeq, direction){
 
-  $.ajax({
-	 type:       "GET",
-	 url:        "ajax_processing.php",
-	 cache:      false,
-	 data:       "action=reorderExpressionNote&expressionNoteID=" + expressionNoteID+"&oldSeq="+ oldSeq+"&direction="+ direction,
-	 success:    function(html) {
-		updateExpressionNoteForm();
-	 }
-
-
- });
-
+    $.ajax({
+        type:       "GET",
+        url:        "ajax_processing.php",
+        cache:      false,
+        data:       "action=reorderExpressionNote&expressionNoteID=" + expressionNoteID+"&oldSeq="+ oldSeq+"&direction="+ direction,
+        success:    function(html) {
+            updateExpressionNoteForm();
+        }
+    });
 }

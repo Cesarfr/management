@@ -26,8 +26,6 @@ include 'templates/header.php';
 $_SESSION['ref_script']=$currentPage;
 
 ?>
-
-
 <table class="headerTable">
 <tr><td>
 <br />
@@ -50,17 +48,12 @@ $_SESSION['ref_script']=$currentPage;
 			}
 		}
 	}
-
 ?>
 
 </select>
-
-
 <br />
 
-<div id='div_report'>
-
-</div>
+<div id='div_report'></div>
 
 </td>
 </tr>
@@ -71,4 +64,3 @@ $_SESSION['ref_script']=$currentPage;
 <?php
 include 'templates/footer.php';
 ?>
-

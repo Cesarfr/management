@@ -15,12 +15,10 @@
 **************************************************************************************************************************
 */
 
-
 $(document).ready(function(){
 	
         updateQualifier();
-        updateSearch();   
-                              
+        updateSearch();
 });
  
 
@@ -35,13 +33,8 @@ function updateSearch(){
          	$('#div_list').html(html);
          	tb_reinit();
          	}
-
-
      });
-
 }
-
-
 
 $("#expressionTypeID").change(function () {
 	$('#qualifierID').val('');
@@ -49,14 +42,9 @@ $("#expressionTypeID").change(function () {
 	updateSearch();
 });
 
-
-
 $("#qualifierID").change(function () {
 	updateSearch();
 });
-
-
-
 
 function updateQualifier(){
 	// update qualifier dropdown
@@ -74,9 +62,5 @@ function updateQualifier(){
          		$("#div_Qualifiers").html("<input type='hidden' id='qualifierID' value='' />");
          	}
          }
-
-
      });
-
-
 }

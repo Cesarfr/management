@@ -43,13 +43,8 @@ if ($license->shortName){
 
 ?>
 
-
 <input type='hidden' name='licenseID' id='licenseID' value='<?php echo $licenseID; ?>'>
-
-<div id='div_licenseHead'>
-
-</div>
-
+<div id='div_licenseHead'></div>
 </center>
 
 <input type='hidden' name='licenseID' id='licenseID' value='<?php echo $license->licenseID; ?>'>
@@ -59,7 +54,6 @@ if ($license->shortName){
 		<tr>
 			<td class="sidemenu">
 				<div class="sidemenuselected" style='position: relative; width: 91px'><a href='javascript:void(0)' class='showDocuments'><?php echo _("Documents");?></a></div>
-				<!-- <div class='sidemenuunselected'><a href='javascript:void(0)' class='showExpressions'>Expressions</a></div> -->
 				<?php if ($displaySFX == "1"){ ?><div class='sidemenuunselected'><a href='javascript:void(0)' class='showSFXProviders'><?php echo _("Terms Tool");?></a></div><?php } ?>
 				<div class='sidemenuunselected'><a href='javascript:void(0)' class='showAttachments'><?php echo _("Attachments");?></a><br />&nbsp;<span class='span_AttachmentNumber'></span></div>
 			</td>
@@ -99,7 +93,6 @@ if ($license->shortName){
 	</table>
 </div>
 
-
 <div id ='div_displaySFXProviders' style='display:none;width:899px;'>
 	<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 		<tr>
@@ -118,18 +111,15 @@ if ($license->shortName){
 	</table>
 </div>
 
-
 <div id ='div_displayAttachments' style='display:none;width:899px;'>
 	<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 		<tr>
 			<td class="sidemenu">
 				<div class="sidemenuunselected"><a href='javascript:void(0)' class='showDocuments'><?php echo _("Documents");?></a></div>
-<!--				<div class='sidemenuunselected'><a href='javascript:void(0)' class='showExpressions'>Expressions</a></div> -->
 				<?php if ($displaySFX == "1"){ ?><div class='sidemenuunselected'><a href='javascript:void(0)' class='showSFXProviders'><?php echo _("Terms Tool");?></a></div><?php } ?>
 				<div class='sidemenuselected' style='position: relative; width: 91px'><a href='javascript:void(0)' class='showAttachments'><?php echo _("Attachments");?></a><br />&nbsp;<span class='span_AttachmentNumber'></span></div>
 			</td>
 			<td class='mainContent'>
-
 				<div id='div_attachments'>
 				<img src = "images/circle.gif"><?php echo _("Loading...");?>
 				</div>

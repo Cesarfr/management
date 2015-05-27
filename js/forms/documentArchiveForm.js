@@ -14,33 +14,27 @@
 **
 **************************************************************************************************************************
 */
- 
+
 
 $(function(){
-	$('.date-pick').datePicker({startDate:'01/01/1996'});
+    $('.date-pick').datePicker({startDate:'01/01/1996'});
 });
-
-
 
 $("#submitArchive").click(function () {
-  $.ajax({
-	 type:       "GET",
-	 url:        "ajax_processing.php",
-	 cache:      false,
-	 data:       "action=archiveDocument&expirationDate=" + $("#expirationDate").val() + "&documentID=" + $("#documentID").val(),
-	 success:    function(html) {
-		if (html){
-			$("#span_errors").html(html);
-		}else{
-			window.parent.tb_remove();
-			window.parent.updateDocuments();
-			window.parent.updateExpressions();
-			return false;
-		}
-	 }
-   });
-
-
+    $.ajax({
+        type:       "GET",
+        url:        "ajax_processing.php",
+        cache:      false,
+        data:       "action=archiveDocument&expirationDate=" + $("#expirationDate").val() + "&documentID=" + $("#documentID").val(),
+        success:    function(html) {
+            if (html){
+                $("#span_errors").html(html);
+            }else{
+                window.parent.tb_remove();
+                window.parent.updateDocuments();
+                window.parent.updateExpressions();
+                return false;
+            }
+        }
+    });
 });
-
-

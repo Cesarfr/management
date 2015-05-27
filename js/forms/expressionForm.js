@@ -15,110 +15,90 @@
 **************************************************************************************************************************
 */
 
-
-
 $(function(){
-
 
     //the following is to fix a bug in IE6 and IE7 that prevents the entire line from being shown in a dropdown
     $("#documentID")
-	.mouseover(function(){
-	    if($.browser.msie){
-		    var cssObj = {
-		      'width' : 'auto',
-		      'position' : 'absolute'
-		    }
+        .mouseover(function(){
+        if($.browser.msie){
+            var cssObj = {
+                'width' : 'auto',
+                'position' : 'absolute'
+            }
+            $(this).css(cssObj);
+        }
+    })
 
-		    $(this).css(cssObj);
-	   }
-	})
-
-	.change(function(){
-	    if($.browser.msie){	
-		    var cssObj = {
-		      'width' : '280px',
-		      'position' : ''
-		    }		    
-		$(this).css(cssObj);
-	    }
-	})
-
+        .change(function(){
+        if($.browser.msie){	
+            var cssObj = {
+                'width' : '280px',
+                'position' : ''
+            }		    
+            $(this).css(cssObj);
+        }
+    })
 
 });
-
-
-
 
 $("#submitExpression").click(function () {
-	$("#submitExpression").attr("disabled","disabled");
+    $("#submitExpression").attr("disabled","disabled");
 
-	qualifierList ='';
-	$(".check_Qualifiers:checked").each(function(id) {
-	      qualifierList += $(this).val() + ",";
-	});
-	
-	$.post("ajax_processing.php?action=submitExpression", { expressionTypeID: $("#expressionTypeID").val(), documentText: $("#documentText").val(), documentID: $("#documentID").val(), expressionID: $("#expressionID").val(), qualifiers: qualifierList  } ,
-		function(html){
-			if (html){
-				$("#span_errors").html(html);
-			}else{
-				window.parent.tb_remove();
-				window.parent.updateExpressions();
-				window.parent.updateDocuments();
-				window.parent.updateArchivedDocuments();
-				return false;
-			}
+    qualifierList ='';
+    $(".check_Qualifiers:checked").each(function(id) {
+        qualifierList += $(this).val() + ",";
+    });
 
-		});
-	return false;
+    $.post("ajax_processing.php?action=submitExpression", { expressionTypeID: $("#expressionTypeID").val(), documentText: $("#documentText").val(), documentID: $("#documentID").val(), expressionID: $("#expressionID").val(), qualifiers: qualifierList  } ,
+           function(html){
+        if (html){
+            $("#span_errors").html(html);
+        }else{
+            window.parent.tb_remove();
+            window.parent.updateExpressions();
+            window.parent.updateDocuments();
+            window.parent.updateArchivedDocuments();
+            return false;
+        }
+
+    });
+    return false;
 });
-
 
 function newExpressionType(){
-  $('#span_newExpressionType').html("<input type='text' name='newExpressionType' id='newExpressionType' style='width:80px;' />  <a href='javascript:addExpressionType();'>"+_("add")+"</a>");
+    $('#span_newExpressionType').html("<input type='text' name='newExpressionType' id='newExpressionType' style='width:80px;' />  <a href='javascript:addExpressionType();'>"+_("add")+"</a>");
 }
-
 
 function addExpressionType(){
-  //add expressionType to db and returns updated select box
-  $.ajax({
-	 type:       "POST",
-	 url:        "ajax_processing.php?action=addExpressionType",
-	 cache:      false,
-	 data:       { shortName: $("#newExpressionType").val() },
-	 success:    function(html) { $('#span_expressionType').html(html); $('#span_newExpressionType').html("<font color='red'>"+_("ExpressionType has been added")+"</font>"); }
- });
+    //add expressionType to db and returns updated select box
+    $.ajax({
+        type:       "POST",
+        url:        "ajax_processing.php?action=addExpressionType",
+        cache:      false,
+        data:       { shortName: $("#newExpressionType").val() },
+        success:    function(html) { $('#span_expressionType').html(html); $('#span_newExpressionType').html("<font color='red'>"+_("ExpressionType has been added")+"</font>"); }
+    });
 }
 
-
-
-
 $("#expressionTypeID").change(function () {
-	updateQualifier();
+    updateQualifier();
 });
 
-
-
-
 function updateQualifier(){
-      $("#div_Qualifiers").html('');
-      $.ajax({
-         type:       "GET",
-         url:        "ajax_htmldata.php",
-         cache:      false,
-         data:       "action=getQualifierCheckboxHTML&expressionTypeID=" + $("#expressionTypeID").val(),
-         success:    function(html) { 
-         	if (html != ''){
-         		$("#tr_Qualifiers").show();
-         		$("#div_Qualifiers").html(html);
-         	}else{
-         		$("#tr_Qualifiers").hide();
-         		$("#div_Qualifiers").html("<input type='hidden' id='qualifierID' value='' />");
-         	}
-         }
-
-
-     });
-
-
+    $("#div_Qualifiers").html('');
+    $.ajax({
+        type:       "GET",
+        url:        "ajax_htmldata.php",
+        cache:      false,
+        data:       "action=getQualifierCheckboxHTML&expressionTypeID=" + $("#expressionTypeID").val(),
+        success:    function(html) { 
+            if (html != ''){
+                $("#tr_Qualifiers").show();
+                $("#div_Qualifiers").html(html);
+            }else{
+                $("#tr_Qualifiers").hide();
+                $("#div_Qualifiers").html("<input type='hidden' id='qualifierID' value='' />");
+            }
+        }
+    });
 }
