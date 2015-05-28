@@ -534,7 +534,7 @@ switch ($_GET['action']) {
 					}
 				}
 				?>
-				<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:260px;">
+				<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:100%;">
 				<tr>
 				<td colspan='2'><br /><span class='headerText'><?php echo $response; ?></span><br /></td>
 				</tr>
@@ -546,7 +546,7 @@ switch ($_GET['action']) {
 				<?php
 			} catch (Exception $e) {
 				?>
-				<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:260px;">
+				<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:100%;">
 				<tr>
 				<td colspan='2'><br /><span class='headerText'><?php echo _("SQL Insert Failed.") .' '. $e->getMessage() .' '. _("Please make sure everything is filled out correctly.");?></span><br /></td>
 				</tr>
@@ -559,7 +559,7 @@ switch ($_GET['action']) {
 			}
 		}else{
 			?>
-			<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:260px;">
+			<table class="thickboxTable" style="background-image:url('images/title.gif');background-repeat:no-repeat;width:100%;">
 			<tr>
 			<td colspan='2'><br /><span class='headerText'><?php echo _("SQL Insert Failed.") .' '. $e->getMessage() .' '. _("Please make sure everything is filled out correctly.");?></span><br /></td>
 			</tr>

@@ -376,8 +376,8 @@ if ($_GET['isArchived'] == 1) {
 		<?php } ?>
 
 		<tr style="vertical-align:middle;">
-		<td style="padding-left:8px;padding-top:8px;">&nbsp;</td>
-		<td style="padding-top:8px;padding-right:8px;"><input type='button' value='<?php echo _("submit");?>' name='submitDocument' id='submitDocument'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove();"></td>
+		<!--<td style="padding-left:8px;padding-top:8px;">&nbsp;</td>-->
+		<td colspan="3" style="padding-top:8px;padding-right:8px;text-align:center;"><input type='button' value='<?php echo _("submit");?>' name='submitDocument' id='submitDocument' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove();" /></td>
 		</tr>
 		</table>
 		</div>
@@ -387,10 +387,6 @@ if ($_GET['isArchived'] == 1) {
 		<?php
 
         break;
-
-
-
-
 
 	//form to prompt for date for archiving documents
 	//Jan 2010, form no longer used, archive checkbox on document form instead
@@ -421,8 +417,6 @@ if ($_GET['isArchived'] == 1) {
 		<?php
 
        break;
-
-
 
 
 	//form to add/edit sfx or other terms tool provider links
@@ -488,389 +482,6 @@ if ($_GET['isArchived'] == 1) {
 
        break;
 
-
-
-
-	//form to add/edit signatures
-    case 'getSignatureForm':
-
-		//signature passed in for updates
-		$documentID = $_GET['documentID'];
-		if (isset($_GET['signatureID'])) $signatureID = $_GET['signatureID']; else $signatureID = '';
-
-		if ($signatureID == 'undefined') $signatureID = '';
-
-		$document = new Document(new NamedArguments(array('primaryKey' => $documentID)));
-
-		?>
-		<div id='div_signatureForm'>
-		<table class="thickboxTable" style="background-image:url('images/tbtitle.gif');width:450px;">
-		<tr>
-		<td><span class='headerText'><?php echo _("Signatures");?></span><br /></td>
-		</tr>
-		<tr>
-
-		<table class='dataTable' style='width:448px;margin-left:2px;'>
-		<tr>
-		<th><?php echo _("Signer Name");?></th>
-		<th><?php echo _("Date");?></th>
-		<th><?php echo _("Type");?></th>
-		<th>&nbsp;</th>
-		<th>&nbsp;</th>
-		</tr>
-
-		<?php
-
-			if ($signatureID == ""){
-				echo "<input type='hidden' name='signatureID' id='signatureID' value='' />";
-			}
-
-			$display = array();
-			foreach ($document->getSignaturesForDisplay() as $display) {
-				echo "<tr>";
-
-				//used for in-line editing (since this is already a form, can't make another form to edit sigs!)
-				if ($signatureID == $display['signatureID']){
-					echo "<td><input type='textbox' id='signerName' value=\"" . $display['signerName'] . "\" style='width:118px;' /></td>";
-					echo "<td><input class='date-pick' id='signatureDate' name='signatureDate' style='width:80px' value=\"" . format_date($display['signatureDate']) . "\" /></td>";
-					echo "<td><span id='span_signatureType'><select id='signatureTypeID' name='signatureTypeID'>";
-
-					$stdisplay = array();
-					$signatureType = new SignatureType();
-
-					foreach($signatureType->allAsArray() as $stdisplay) {
-						if ($display['signatureTypeID'] == $stdisplay['signatureTypeID']){
-							echo "<option value='" . $stdisplay['signatureTypeID'] . "' selected>" . $stdisplay['shortName'] . "</option>";
-						}else{
-							echo "<option value='" . $stdisplay['signatureTypeID'] . "'>" . $stdisplay['shortName'] . "</option>";
-						}
-					}
-
-					echo "</select></span>";
-
-					echo "</td>";
-					echo "<td><a href='javascript:void(0)' id='commitUpdate' name='commitUpdate'>"._("commit update")."</a></td>";
-					echo "<input type='hidden' name='signatureID' id='signatureID' value='" . $display['signatureID'] . "' />";
-					echo "<td>&nbsp;</td>";
-
-
-				}else{
-					echo "<td>" . $display['signerName'] . "</td>";
-					echo "<td>" . format_date($display['signatureDate']) . "</td>";
-					echo "<td>" . $display['signatureTypeName'] . "</td>";
-					if ($signatureID){
-						echo "<td>&nbsp;</td>";
-						echo "<td>&nbsp;</td>";
-					}else{
-						echo "<td><a href='javascript:updateSignatureForm(\"" . $display['signatureID'] . "\");'>edit</a></td>";
-						echo "<td><a href='javascript:removeSignature(\"" . $display['signatureID'] . "\");'>remove</a></td>";
-					}
-				}
-
-				echo "</tr>";
-
-			}
-
-
-			if ($signatureID == ""){
-				echo "<tr>";
-				echo "<td><input type='text' id='signerName' style='width:118px;' /></td>";
-				echo "<td><input class='date-pick' id='signatureDate' name='signatureDate' style='width:80px' /></td>";
-				echo "<td><span id='span_signatureType'><select id='signatureTypeID' name='signatureTypeID'>";
-				$stdisplay = array();
-				$signatureType = new SignatureType();
-
-				foreach($signatureType->allAsArray() as $stdisplay) {
-					echo "<option value='" . $stdisplay['signatureTypeID'] . "'>" . $stdisplay['shortName'] . "</option>";
-				}
-
-				echo "</select></span></td>";
-				echo "<td><a href='javascript:void(0);' id='commitUpdate' name='commitUpdate'>"._("add")."</a></td>";
-				echo "<td>&nbsp;</td>";
-				echo "</tr>";
-			}
-
-		?>
-
-		</table>
-		</td>
-		</tr>
-		<tr><td style='text-align:center;width:100%;'><br /><br /><a href='#' onclick='window.parent.tb_remove();  window.parent.updateDocuments();  window.parent.updateArchivedDocuments(); return false'><?php echo _("Close");?></a></td></tr>
-		</table>
-		<input type="hidden" id='documentID' name='documentID' value='<?php echo $documentID; ?>'>
-
-		<script type="text/javascript" src="js/forms/signatureForm.js?random=<?php echo rand(); ?>"></script>
-		</div>
-
-		<?php
-
-       break;
-
-
-	//form to add/edit expressions
-    case 'getExpressionForm':
-
-		//expression ID sent in for updates
-		if (isset($_GET['expressionID'])) $expressionID = $_GET['expressionID']; else $expressionID = '';
-
-		$licenseID = $_GET['licenseID'];
-
-		$expression = new Expression(new NamedArguments(array('primaryKey' => $expressionID)));
-		$license = new License(new NamedArguments(array('primaryKey' => $licenseID)));
-
-		//get the expression type so we can determine the qualifiers to display
-		$expressionTypeID = $expression->expressionTypeID;
-
-		$expressionType = new ExpressionType();
-		$expressionTypeArray = $expressionType->allAsArray();
-
-		//if expression type id isn't set up, get the first one as a default
-		if (!$expressionTypeID){
-			$expressionTypeID = $expressionTypeArray[0]['expressionTypeID'];
-		}
-
-		$expressionType = new ExpressionType(new NamedArguments(array('primaryKey' => $expressionTypeID)));
-
-		//get qualifiers set up for this expression
-		$sanitizedInstance = array();
-		$instance = new Qualifier();
-		$expressionQualifierProfileArray = array();
-		foreach ($expression->getQualifiers() as $instance) {
-			$expressionQualifierProfileArray[] = $instance->qualifierID;
-		}
-
-
-		//get all qualifiers for output in checkboxes
-		$expressionQualifierArray = array();
-		$expressionQualifierArray = $expressionType->getQualifiers();
-
-
-		?>
-		<div id='div_expressionForm'>
-		<input type='hidden' id='expressionID' name='expressionID' value='<?php echo $expressionID; ?>'>
-
-		<table class="thickboxTable" style="width:340px;">
-		<tr>
-		<td colspan='2'><span class='headerText'><?php echo _("Expressions");?></span><br /><span id='span_errors'></span><br /></td>
-		</tr>
-
-
-		<tr>
-		<td colspan='2'><label for="documentID" class="formText"><?php echo _("Document:");?></label><br />
-		<select name='documentID' id='documentID' style='width:280px;'>
-		<?php
-
-		$display = array();
-
-		foreach($license->getDocuments() as $display) {
-			if ($expression->documentID == $display->documentID) {
-				echo "<option value='" . $display->documentID . "' selected>" . $display->shortName . "</option>";
-			}else{
-				echo "<option value='" . $display->documentID . "'>" . $display->shortName . "</option>";
-			}
-		}
-
-
-		?>
-		</select><br />
-		</td>
-		</tr>
-
-
-		<tr>
-		<td colspan='2'><label for="expressionTypeID" class="formText"><?php echo _("Expression Type:");?></label><br />
-		<span id='span_expressionType'>
-		<select name='expressionTypeID' id='expressionTypeID'>
-		<?php
-
-		$display = array();
-
-		foreach($expressionTypeArray as $display) {
-			if ($expression->expressionTypeID == $display['expressionTypeID']){
-				echo "<option value='" . $display['expressionTypeID'] . "' selected>" . $display['shortName'] . "</option>";
-			}else{
-				echo "<option value='" . $display['expressionTypeID'] . "'>" . $display['shortName'] . "</option>";
-			}
-		}
-
-
-		?>
-		</select>
-		</span>&nbsp;&nbsp;
-		<span id='span_newExpressionType'><a href="javascript:newExpressionType();"><?php echo _("add expression type");?></a></span>
-
-		</td>
-		</tr>
-
-
-		<tr id='tr_Qualifiers' <?php if (count($expressionQualifierArray) == 0) echo "style='display:none;'"; ?>>
-		<td colspan='2'><label for="qualifierID" class="formText"><?php echo _("Qualifier:");?></label><br />
-		<div id='div_Qualifiers'>
-
-		<table>
-		<?php
-		$i=0;
-		if (count($expressionQualifierArray) > 0){
-			//loop over all qualifiers available for this expression type
-			foreach ($expressionQualifierArray as $expressionQualifierIns){
-				$i++;
-				if(($i % 2)==1){
-					echo "<tr>\n";
-				}
-				if (in_array($expressionQualifierIns->qualifierID,$expressionQualifierProfileArray)){
-					echo "<td><input class='check_Qualifiers' type='checkbox' name='" . $expressionQualifierIns->qualifierID . "' id='" . $expressionQualifierIns->qualifierID . "' value='" . $expressionQualifierIns->qualifierID . "' checked />   " . $expressionQualifierIns->shortName . "</td>\n";
-				}else{
-					echo "<td><input class='check_Qualifiers' type='checkbox' name='" . $expressionQualifierIns->qualifierID . "' id='" . $expressionQualifierIns->qualifierID . "' value='" . $expressionQualifierIns->qualifierID . "' />   " . $expressionQualifierIns->shortName . "</td>\n";
-				}
-				if(($i % 2)==0){
-					echo "</tr>\n";
-				}
-			}
-
-			if(($i % 2)==1){
-				echo "<td>&nbsp;</td></tr>\n";
-			}
-		}
-		?>
-		</table>
-
-
-		</div>
-		</td>
-		</tr>
-
-		<tr>
-		<td colspan='2'><label for="documentText" class="formText"><?php echo _("Document Text:");?></label><br /><textarea name='documentText' id = 'documentText' cols='48' rows='10'><?php echo $expression->documentText; ?></textarea></td>
-		</tr>
-
-		<tr style="vertical-align:middle;">
-		<td style="padding-top:8px;"><input type='button' value='<?php echo _("submit");?>' name='submitExpression' id='submitExpression'></td>
-		<td style="padding-top:8px;padding-right:8px;text-align:right;"><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove()"></td>
-		</tr>
-		</table>
-		</div>
-
-		<script type="text/javascript" src="js/forms/expressionForm.js?random=<?php echo rand(); ?>"></script>
-
-		<?php
-
-        break;
-
-
-	//form to add / edit expression notes (internal and display notes)
-    case 'getExpressionNotesForm':
-
-		$expressionID = $_GET['expressionID'];
-		if (isset($_GET['expressionNoteID'])) $expressionNoteID = $_GET['expressionNoteID']; else $expressionNoteID = '';
-		if ($expressionNoteID == 'undefined') $expressionNoteID = '';
-
-		$expression = new Expression(new NamedArguments(array('primaryKey' => $expressionID)));
-		$expressionType = new ExpressionType(new NamedArguments(array('primaryKey' => $expression->expressionTypeID)));
-
-		$documentText = nl2br($expression->documentText);
-		$noteType = $expressionType->noteType;
-
-
-		$expressionNoteArray = $expression->getExpressionNotes();
-
-		?>
-		<div id='div_expressionNotesForm'>
-		<input type='hidden' name='expressionID' id='expressionID' value='<?php echo $expressionID; ?>'>
-		<table class="thickboxTable" style="width:420px;">
-		<tr>
-		<td><span class='headerText'><?php echo ucfirst($noteType).' '._("Notes");?></span><br />
-		<b><?php echo _("For Document Text:");?></b>  <?php echo $documentText; ?>
-		<br /><br /></td>
-		</tr>
-		<tr>
-		<td>
-
-		<table class='dataTable' style='width:420px;'>
-		<tr>
-		<th style='width:19px;'>&nbsp;</th>
-		<th><b><?php echo ucfirst($noteType).' '._("Notes");?></b></th>
-		<th>&nbsp;</th>
-		<th>&nbsp;</th>
-		</tr>
-
-		<?php
-			if ($expressionNoteID == ""){
-				echo "<input type='hidden' name='expressionNoteID' id='expressionNoteID' value='' />";
-			}
-
-			$rowCount = count($expressionNoteArray);
-			$rowNumber=0;
-			$expressionNote = new ExpressionNote();
-			foreach ($expressionNoteArray as $expressionNote){
-				$rowNumber++;
-				echo "<tr>";
-
-				if ($expressionNoteID == $expressionNote->expressionNoteID){
-
-					echo "<td>&nbsp;</td>";
-					echo "<td><textarea name='expressionNote' id = 'expressionNote' cols='50' rows='4'>" .  $expressionNote->note . "</textarea></td>";
-					echo "<td><a href='javascript:void(0)' id='commitUpdate' name='commitUpdate'>"._("commit update")."</a></td>";
-					echo "<input type='hidden' name='expressionNoteID' id='expressionNoteID' value='" . $expressionNoteID . "' />";
-					echo "<input type='hidden' name='displayOrderSeqNumber' id='displayOrderSeqNumber' value='" . $expressionNote->displayOrderSeqNumber . "' />";
-					echo "<td>&nbsp;</td>";
-				}else{
-
-					if ($expressionNoteID){
-						echo "<td>&nbsp;</td>";
-						echo "<td>" .  nl2br($expressionNote->note) . "</td>";
-						echo "<td>&nbsp;</td>";
-						echo "<td>&nbsp;</td>";
-
-					}else{
-						//calculate which arrows to show for reordering
-						if ($rowNumber == "1"){
-							echo "<td style='text-align:right;'><a href='javascript:reorder(\"" . $expressionNote->expressionNoteID . "\", \"" . $expressionNote->displayOrderSeqNumber . "\",\"down\");'><img src='images/arrowdown.gif' border=0></a></td>";
-						}else if($rowNumber == $rowCount){
-							echo "<td><a href='javascript:reorder(\"" . $expressionNote->expressionNoteID . "\", \"" . $expressionNote->displayOrderSeqNumber . "\",\"up\");'><img src='images/arrowup.gif' border=0></a></td>";
-						}else{
-							echo "<td><a href='javascript:reorder(\"" . $expressionNote->expressionNoteID . "\", \"" . $expressionNote->displayOrderSeqNumber . "\",\"up\");'><img src='images/arrowup.gif' border=0></a>&nbsp;<a href='javascript:reorder(\"" . $expressionNote->expressionNoteID . "\", \"" . $expressionNote->displayOrderSeqNumber . "\",\"down\");'><img src='images/arrowdown.gif' border=0></a></td>";
-						}
-						echo "<td>" .  nl2br($expressionNote->note) . "</td>";
-						echo "<td><a href='javascript:updateExpressionNoteForm(\"" . $expressionNote->expressionNoteID . "\");'>edit</a></td>";
-						echo "<td><a href='javascript:removeExpressionNote(\"" . $expressionNote->expressionNoteID . "\");'>remove</a></td>";
-					}
-
-				}
-
-
-				echo "</tr>";
-
-			}
-			$rowNumber++;
-
-			if ($expressionNoteID == ""){
-				echo "<tr>";
-				echo "<td>&nbsp;</td>";
-				echo "<td><textarea name='expressionNote' id = 'expressionNote' cols='50' rows='4'></textarea></td>";
-				echo "<td><a href='javascript:addExpressionNote();'>"._("add")."</a></td>";
-				echo "<td>&nbsp;</td>";
-				echo "</tr>";
-			}
-		?>
-
-
-		</table>
-		</td>
-		</tr>
-		<tr><td style='text-align:center;width:100%;'><br /><br /><a href='#' onclick='window.parent.tb_remove();  window.parent.<?php if ($_GET['org'] == "compare") { echo "updateSearch()"; } else { echo "updateExpressions()"; } ?>; return false'>Close</a></td></tr>
-		</table>
-		<input type="hidden" id='documentID' name='documentID' value='<?php echo $documentID; ?>'>
-		<input type="hidden" id='org' name='org' value='<?php echo $_GET['org']; ?>'>
-
-		<script type="text/javascript" src="js/forms/expressionNotesForm.js?random=<?php echo rand(); ?>"></script>
-		</div>
-
-		<?php
-
-       break;
-
-
-
 	//form to add/edit attachment form
     case 'getAttachmentForm':
 
@@ -889,8 +500,8 @@ if ($_GET['isArchived'] == 1) {
 		?>
 		<div id='div_attachmentForm'>
 		<form id='attachmentForm'>
-		<input type='hidden' id='attachmentID' name='attachmentID' value='<?php echo $attachmentID; ?>'>
-		<input type='hidden' id='licenseID' name='licenseID' value='<?php echo $_GET['licenseID']; ?>'>
+		<input type='hidden' id='attachmentID' name='attachmentID' value='<?php echo $attachmentID; ?>' />
+		<input type='hidden' id='licenseID' name='licenseID' value='<?php echo $_GET['licenseID']; ?>' />
 		<table class="thickboxTable" style="width:300px;">
 		<tr>
 		<td colspan='2'><span class='headerText'><?php echo _("Attachments");?></span><br /><span id='span_errors'></span><br /></td>
@@ -935,8 +546,8 @@ if ($_GET['isArchived'] == 1) {
 		</tr>
 
 		<tr style="vertical-align:middle;">
-		<td style="padding-top:8px;"><input type='button' value='<?php echo _("submit");?>' name='submitAttachment' id='submitAttachment'></td>
-		<td style="padding-top:8px;padding-right:8px;text-align:right;"><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove();window.parent.updateAttachments();"></td>
+		<td style="padding-top:8px;"><input type='button' value='<?php echo _("submit");?>' name='submitAttachment' id='submitAttachment' /></td>
+		<td style="padding-top:8px;padding-right:8px;text-align:right;"><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove();window.parent.updateAttachments();" /></td>
 		</tr>
 		</table>
 
@@ -1018,7 +629,7 @@ if ($_GET['isArchived'] == 1) {
 			</tr>
 			<tr style="vertical-align:middle;">
 				<td style="padding-top:8px;"><input type='button' value='<?php echo _("submit");?>' name='submitNote' id='submitNote' /></td>
-				<td style="padding-top:8px;padding-right:8px;text-align:right;"><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove();window.parent.updateNotes();"></td>
+				<td style="padding-top:8px;padding-right:8px;text-align:right;"><input type='button' value='<?php echo _("cancel");?>' onclick="tb_remove();window.parent.updateNotes();" /></td>
 			</tr>
 		</table>
 
@@ -1099,10 +710,10 @@ if ($_GET['isArchived'] == 1) {
 		<div id='div_updateForm'>
 		<table class="thickboxTable" style="width:285px;padding:2px;">
 		<tr><td colspan='3'><span class='headerText'><?php echo $update.' '._("User");?></span><br /><br /></td></tr>
-		<tr><td colspan='2' style='width:135px;'><label for='loginID'><b><?php echo _("Login ID");?></b></label</td><td><input type='text' id='loginID' name='loginID' value='<?php echo $loginID; ?>' style='width:140px;' /></td></tr>
-		<tr><td colspan='2'><label for='firstName'><b><?php echo _("First Name");?></b></label</td><td><input type='text' id='firstName' name='firstName' value="<?php if (isset($updateUser)) echo $updateUser->firstName; ?>" style='width:140px;' /></td></tr>
-		<tr><td colspan='2'><label for='lastName'><b><?php echo _("Last Name");?></b></label</td><td><input type='text' id='lastName' name='lastName' value="<?php if (isset($updateUser)) echo $updateUser->lastName; ?>" style='width:140px;' /></td></tr>
-		<tr><td><label for='privilegeID'><b><?php echo _("Privilege");?></b></label</td>
+		<tr><td colspan='2' style='width:135px;'><label for='loginID'><b><?php echo _("Login ID");?></b></label></td><td><input type='text' id='loginID' name='loginID' value='<?php echo $loginID; ?>' style='width:140px;' /></td></tr>
+            <tr><td colspan='2'><label for='firstName'><b><?php echo _("First Name");?></b></label></td><td><input type='text' id='firstName' name='firstName' value="<?php if (isset($updateUser)) echo $updateUser->firstName; ?>" style='width:140px;' /></td></tr>
+            <tr><td colspan='2'><label for='lastName'><b><?php echo _("Last Name");?></b></label></td><td><input type='text' id='lastName' name='lastName' value="<?php if (isset($updateUser)) echo $updateUser->lastName; ?>" style='width:140px;' /></td></tr>
+            <tr><td><label for='privilegeID'><b><?php echo _("Privilege");?></b></label></td>
 		<td>
 				<fieldset id="fieldsetPrivilege">
 				<a title = "<?php echo _("Add/Edit users can add, edit, or remove licenses and associated fields")."\n\n"._("Admin users have access to the Admin page and the SFX tab.")."\n\n"._("View only users can view all license information, including the license pdf");?>" href=""><img src='images/help.gif'></a>
@@ -1137,10 +748,10 @@ if ($_GET['isArchived'] == 1) {
 		//if not configured to use SFX, hide the Terms Tool Report
 		if ($util->useTermsTool()) {
 		?>
-		<tr><td><label for='emailAddressForTermsTool'><b><?php echo _("Terms Tool Email");?></b></label</td>
+            <tr><td><label for='emailAddressForTermsTool'><b><?php echo _("Terms Tool Email");?></b></label></td>
 		<td>
 				<fieldset id="fieldsetEmail">
-				<a title = "<?php echo _("Enter email address if you wish this user to receive email notifications when the terms tool box is checked on the Expressions tab.")."\n\n"._("Leave this field blank if the user shouldn't receive emails.");?>" href=""><img src='images/help.gif'></a>
+				<a title = "<?php echo _("Enter email address if you wish this user to receive email notifications when the terms tool box is checked on the Expressions tab.")."\n\n"._("Leave this field blank if the user shouldn't receive emails.");?>" href=""><img src='images/help.gif'/></a>
 				</fieldset>
 
 		</td>
@@ -1150,8 +761,8 @@ if ($_GET['isArchived'] == 1) {
 		<?php } else { echo "<input type='hidden' id='emailAddressForTermsTool' name='emailAddressForTermsTool' value='' /><br />"; }?>
 
 		<tr style="vertical-align:middle;">
-		<td colspan='2' style="padding-top:8px;text-align:right;">&nbsp;</td>
-		<td style="padding-top:18px;padding-right:8px;text-align:left;"><input type='button' value='<?php echo $update; ?>' onclick='javascript:window.parent.submitUserData("<?php echo $loginID; ?>");'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' value='<?php echo _("cancel");?>' onclick="window.parent.tb_remove(); return false"></td>
+		<!--<td colspan='2' style="padding-top:8px;text-align:right;">&nbsp;</td>-->
+		<td colspan="3" style="padding-top:18px;padding-right:8px;text-align:center;"><input type='button' value='<?php echo $update; ?>' onclick='javascript:window.parent.submitUserData("<?php echo $loginID; ?>");'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='button' value='<?php echo _("cancel");?>' onclick="window.parent.tb_remove(); return false"></td>
 		</tr>
 
 		</table>
@@ -1163,52 +774,6 @@ if ($_GET['isArchived'] == 1) {
 		<?php
 
 		break;
-
-
-	//expression types on admin.php screen - since expression types also have note type (internal/display)
-	case 'getExpressionTypeForm':
-		if (isset($_GET['expressionTypeID'])) $expressionTypeID = $_GET['expressionTypeID']; else $expressionTypeID = '';
-
-		if ($expressionTypeID){
-			$update=_('Update');
-			$expressionType = new ExpressionType(new NamedArguments(array('primaryKey' => $expressionTypeID)));
-		}else{
-			$update=_('Add New');
-		}
-
-
-		?>
-		<div id='div_updateForm'>
-		<input type='hidden' name='expressionTypeID' id='expressionTypeID' value='<?php echo $expressionTypeID; ?>' />
-		<table class="thickboxTable" style="width:260px;padding:2px;">
-		<tr><td colspan='2'><span class='headerText'><?php echo $update.' '._("Expression Type");?></span><br /><br /></td></tr>
-		<tr><td><label for='shortName'><b><?php echo _("Expression Type");?></b></label</td><td><input type='text' id='shortName' name='shortName' value='<?php if (isset($expressionType)) echo $expressionType->shortName; ?>' style='width:130px;'/></td></tr>
-		<tr><td><label for='noteType'><b><?php echo _("Note Type");?></b></label</td>
-		<td>
-		<select name='noteType' id='noteType' style='width:135px'>
-		<option value='Internal' <?php if ((isset($expressionType)) && ($expressionType->noteType == 'Internal')) echo "selected"; ?> ><?php echo _("Internal");?></option>
-		<option value='Display' <?php if ((isset($expressionType)) && ($expressionType->noteType == 'Display')) echo "selected"; ?> ><?php echo _("Display");?></option>
-		</select>
-		</td>
-		</tr>
-
-		<tr><td colspan='2'><span class='smallText'>* <?php echo _("Note type of display allows for terms tool use");?></span></td></tr>
-
-
-		<tr>
-		<td style="padding-top:18px;"><input type='button' value='<?php echo $update; ?>' onclick='javascript:window.parent.submitExpressionType();'></td>
-		<td style="padding-top:18px;padding-right:8px;text-align:right;"><input type='button' value='<?php echo _("cancel");?>' onclick="window.parent.tb_remove(); return false"></td>
-		</tr>
-		</table>
-		</div>
-
-
-		<?php
-
-		break;
-
-
-
 
 	//qualifier on admin.php screen - since qualifiers also have expression types
 	case 'getQualifierForm':
@@ -1228,7 +793,7 @@ if ($_GET['isArchived'] == 1) {
 		<table class="thickboxTable" style="width:290px;padding:2px;">
 		<tr><td colspan='2'><span class='headerText'><?php echo $update.' '._("Qualifier");?></span><br /><br /></td></tr>
 
-		<tr><td><label for='expressionTypeID'><b><?php echo _("For Expression Type");?></b></label</td>
+            <tr><td><label for='expressionTypeID'><b><?php echo _("For Expression Type");?></b></label></td>
 		<td>
 		<select name='expressionTypeID' id='expressionTypeID' style='width:155px'>
 		<?php
@@ -1249,7 +814,7 @@ if ($_GET['isArchived'] == 1) {
 		</td>
 		</tr>
 
-		<tr><td><label for='shortName'><b><?php echo _("Qualifier");?></b></label</td><td><input type='text' id='shortName' name='shortName' value='<?php if (isset($qualifier)) echo $qualifier->shortName; ?>' style='width:150px;'/></td></tr>
+            <tr><td><label for='shortName'><b><?php echo _("Qualifier");?></b></label></td><td><input type='text' id='shortName' name='shortName' value='<?php if (isset($qualifier)) echo $qualifier->shortName; ?>' style='width:150px;'/></td></tr>
 
 		<tr>
 		<td style="padding-top:18px;"><input type='button' value='<?php echo $update; ?>' onclick='javascript:window.parent.submitQualifier();' id='submitQualifier'></td>

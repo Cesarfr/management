@@ -1312,46 +1312,6 @@ switch ($_GET['action']) {
 
 		break;
     
-	//display expression type list for admin screen - needs its own display because of note type
-	case 'getExpressionTypeList':
-
-		$instanceArray = array();
-		$expressionType = new ExpressionType();
-		$tempArray = array();
-
-		foreach ($expressionType->allAsArray() as $tempArray) {
-			array_push($instanceArray, $tempArray);
-		}
-
-		if (count($instanceArray) > 0){
-
-			?>
-			<table class='dataTable' style='width:400px'>
-				<tr>
-				<th><?php echo _("Expression Type");?></th>
-				<th><?php echo _("Note Type");?></th>
-				<th>&nbsp;</th>
-				<th>&nbsp;</th>
-				<?php
-
-				foreach($instanceArray as $instance) {
-					echo "<tr>";
-					echo "<td>" . $instance['shortName'] . "</td>";
-					echo "<td>" . $instance['noteType'] . "</td>";
-					echo "<td style='width:30px'><a href='ajax_forms.php?action=getExpressionTypeForm&expressionTypeID=" . $instance['expressionTypeID'] . "&height=158&width=265&modal=true' class='thickbox'>"._("update")."</a></td>";
-					echo "<td style='width:50px'><a href='javascript:deleteExpressionType(\"" . $instance['expressionTypeID'] . "\")'>"._("remove")."</a></td>";
-					echo "</tr>";
-				}
-
-				?>
-			</table>
-			<?php
-
-		}else{
-			echo _("(none found)");
-		}
-
-		break;
     
 	//display qualifier list for admin screen - needs its own display because of expression type
 	case 'getQualifierList':
