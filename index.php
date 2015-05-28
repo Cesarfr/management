@@ -64,7 +64,11 @@ $_SESSION['ref_script']=$currentPage;
 
 
 	<input type='hidden' name='organizationID' id='organizationID' value='' />
-
+    <?php 
+        $license = new License();
+        $orgArray = array();
+        $orgArray = $license->getOrganizationList();
+    ?>
 	<tr>
 	<td class='searchRow'><label for='consortium'><b><?php echo _("Category");?></b></label>
 	<br />
