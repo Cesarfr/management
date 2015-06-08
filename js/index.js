@@ -15,24 +15,17 @@
 **************************************************************************************************************************
 */
 
-
 $(document).ready(function(){
-
       	//updates the qualifier and terms tool use fields from expression type
 	updateQualifier();
-
         updateSearch();      
-      
 	//perform search if enter is hit
 	$('#searchName').keyup(function(e) {
 	      if(e.keyCode == 13) {
 		updateSearch();
 	      }
 	});
-      
-                  
 });
- 
  
 var orderBy = "TRIM(LEADING 'THE ' FROM UPPER(L.shortName)) asc";
 var pageStart = '1';
@@ -41,8 +34,6 @@ var startWith = '';
 
 function updateSearch(){
       $("#div_feedback").html("<img src='images/circle.gif'> <span style='font-size:80%'>Processing...</span>");
-      
-	
       $.ajax({
          type:       "GET",
          url:        "ajax_htmldata.php",
@@ -52,24 +43,18 @@ function updateSearch(){
          	$("#div_feedback").html("&nbsp;");
          	$('#searchResults').html(html);  
          }
-
-
      });	
-	
 }
- 
  
 function setOrder(column, direction){
  	orderBy = column + " " + direction;
  	updateSearch();
 }
  
- 
 function setPageStart(pageStartNumber){
  	pageStart=pageStartNumber;
  	updateSearch();
 }
- 
  
 function setNumberOfRecords(numberOfRecordsNumber){
 	pageStart = '1';
@@ -96,8 +81,6 @@ $(".searchButton").click(function () {
  	updateSearch(); 
 });
  
- 
- 
 $(".newSearch").click(function () {
   	//reset fields
  	$("#searchName").val("");
@@ -119,26 +102,20 @@ $(".newSearch").click(function () {
  	updateSearch();
 });
  
-  
 $("#searchName").focus(function () {
  	$("#div_searchName").css({'display':'block'}); 
 });
-
 
 $("#showMoreOptions").click(function () {
 	$("#div_additionalSearch").css({'display':'block'}); 
 	$("#hideShowOptions").html("");
 });
 
-
 $("#expressionTypeID").change(function () {
 	$('#qualifierID').val('');
 	updateQualifier();
 	updateSearch();
 });
-
-
-
 
 function updateQualifier(){
       //first update qualifier
@@ -156,11 +133,5 @@ function updateQualifier(){
          		$("#div_Qualifiers").html("<input type='hidden' id='qualifierID' value='' />");
          	}
          }
-
-
      });
-
-
 }
-
-

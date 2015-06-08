@@ -41,9 +41,6 @@ if ($user->isAdmin()){
 </td></tr>
 </table>
 
-
-
-
 <br />
 <br />
 
@@ -72,72 +69,6 @@ if ($user->isAdmin()){
 </td></tr>
 </table>
 
-<!--
-<table class="headerTable">
-<tr><td>
-<span class="headerText">Expression Types</span>&nbsp;&nbsp;<span id='span_ExpressionType_response'></span>
-<br /><span id='span_newExpressionType' class='adminAddInput'><a href='ajax_forms.php?action=getExpressionTypeForm&height=148&width=265&modal=true' class='thickbox' id='expressionType'>add new expression type</a></span>
-<br /><br />
-<div id='div_ExpressionType'>
-<img src = "images/circle.gif">Loading...
-</div>
-</td></tr>
-</table>
--->
-
-<!--
-
-<br />
-<br />
-<table class="headerTable">
-<tr><td>
-<span class="headerText">Qualifiers</span>&nbsp;&nbsp;<span id='span_Qualifier_response'></span>
-<br /><span id='span_newQualifier' class='adminAddInput'><a href='ajax_forms.php?action=getQualifierForm&height=148&width=295&modal=true' class='thickbox'>add new qualifier</a></span>
-<br /><br />
-<div id='div_Qualifier'>
-<img src = "images/circle.gif">Loading...
-</div>
-</td></tr>
-</table>
-
-<br />
-<br />
-
--->
-
-<!--
-<table class="headerTable">
-<tr><td>
-<span class="headerText">Signature Types</span>&nbsp;&nbsp;<span id='span_SignatureType_response'></span>
-<br /><span id='span_newSignatureType' class='adminAddInput'><a href='javascript:showAdd("SignatureType");'>add new signature type</a></span>
-<br /><br />
-<div id='div_SignatureType'>
-<img src = "images/circle.gif">Loading...
-</div>
-</td></tr>
-</table>
-
-<br />
-<br />
--->
-
-<!-- 
-<table class="headerTable">
-<tr><td>
-<span class="headerText">License Statuses</span>&nbsp;&nbsp;<span id='span_Status_response'></span>
-<br /><span id='span_newStatus' class='adminAddInput'><a href='javascript:showAdd("Status");'>add new license status</a></span>
-<br /><br />
-<div id='div_Status'>
-<img src = "images/circle.gif">Loading...
-</div>
-</td></tr>
-</table>
-
-<br />
-<br />
--->
-
-
 <?php
 
 $config = new Configuration;
@@ -162,18 +93,6 @@ if ($config->settings->organizationsModule != 'Y'){ ?>
 
 	<br />
 	<br />
-<!--
-	<table class="headerTable">
-	<tr><td>
-	<span class="headerText">Providers</span>&nbsp;&nbsp;<span id='span_Organization_response'></span>
-	<br /><span id='span_newOrganization' class='adminAddInput'><a href='javascript:showAdd("Organization");'>add new provider</a></span>
-	<br /><br />
-	<div id='div_Organization'>
-	<img src = "images/circle.gif">Loading...
-	</div>
-	</td></tr>
-	</table>
--->
 <?php } ?>
 
 <br />

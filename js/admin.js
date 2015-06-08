@@ -15,7 +15,6 @@
 **************************************************************************************************************************
 */
  
- 
  $(document).ready(function(){
  
       updateUserList();
@@ -27,13 +26,7 @@
       updateForm('SignatureType');  
       updateForm('Status');  
       updateQualifierList();    
-
-
-      
  });
-
-
-
 
  function updateForm(tableName){
 
@@ -46,10 +39,6 @@
           	tb_reinit();
           }
       });
-      
-      
-
-
  }
 
 
@@ -68,8 +57,6 @@
       
  }
  
- 
- 
   function updateExpressionTypeList(){
  
         $.ajax({
@@ -83,9 +70,7 @@
        });
        
   }
- 
- 
-  
+
    function updateQualifierList(){
   
          $.ajax({
@@ -206,10 +191,6 @@ function validateUserForm() {
 
  }
 
-
-
-
-
  function submitQualifier(){
  	$("#submitQualifier").attr("disabled","disabled");
 	$.ajax({
@@ -222,7 +203,6 @@ function validateUserForm() {
           window.parent.tb_remove();
           }
        });
-
  }
 
  function deleteData(tableName, deleteID){
@@ -245,11 +225,9 @@ function validateUserForm() {
 		  tb_reinit();
 		  }
 	      });
-
 	}
  }
  
-
  function deleteUser(loginID){
  
  	if (confirm("Do you really want to delete this user?") == true) {
@@ -270,11 +248,8 @@ function validateUserForm() {
 		  tb_reinit();
 		  }
 	      });
-
 	}
  }
-
-
 
  function deleteExpressionType(deleteID){
  
@@ -297,12 +272,9 @@ function validateUserForm() {
 		  tb_reinit();
 		  }
 	      });
-
 	}
  }
  
-
-
  function deleteQualifier(deleteID){
  
  	if (confirm("Do you really want to delete this data?") == true) {
@@ -323,7 +295,6 @@ function validateUserForm() {
 		  tb_reinit();
 		  }
 	      });
-
 	}
  }
   
@@ -338,11 +309,8 @@ function showAdd(tableName){
                	   addData(tableName);
                }
         });
-
 }
-
 
 function emptyResponse(tableName){
 	$('#span_' + tableName + "_response").html("");
 }
-

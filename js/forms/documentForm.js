@@ -15,12 +15,9 @@
 **************************************************************************************************************************
 */
 
-
 $(function(){
 	$('.date-pick').datePicker({startDate:'01/01/1996'});
-
 	canSubmit=1;
-	
 	//check this name to make sure it isn't already being used
 	$("#shortName").keyup(function(e) {
 		  $.ajax({
@@ -42,16 +39,12 @@ $(function(){
 				}
 			 }
 		  });
-		  
-		  
-                 if(e.keyCode == 13) {
-                 	if(canSubmit == 1){
-                 		doSubmitDocument();
-                 	}
-                 }
-
+         if(e.keyCode == 13) {
+            if(canSubmit == 1){
+                doSubmitDocument();
+            }
+         }
 	});	
-
 
     $("#parentDocumentID")
 	.mouseover(function(){
@@ -76,13 +69,7 @@ $(function(){
 	    }
 	})
 
-
-
-
-
-
 });
-
 
 var fileName = $("#upload_button").val();
 var exists = '';
@@ -113,8 +100,6 @@ function checkUploadDocument (file, extension){
 				exists = "";
 			}
 		 }
-
-
 	});
 }
 
@@ -135,10 +120,8 @@ new AjaxUpload('upload_button',
   					$("#div_uploadFile").html("<br />");
           }
 				}
-
 		}
 });
-
 
 //submit document to be entered into db
 $("#submitDocument").click(function () {
@@ -184,7 +167,6 @@ function validateForm (){
 	}
 }
 
-
 function newDocumentType(){
   $('#span_newDocumentType').html("<input type='text' name='newDocumentType' id='newDocumentType' style='width:80px;padding-top:1px;' />  <a href='javascript:addDocumentType();'>add</a>");
          
@@ -196,7 +178,6 @@ function newDocumentType(){
                  }
         });
 }
-
 
 function addDocumentType(){
   //check for duplicates

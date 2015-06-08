@@ -85,8 +85,6 @@ switch ($_GET['action']) {
 
         break;
 
-
-
     case 'deleteLicense':
 
 		//note: does not delete physical documents
@@ -148,7 +146,6 @@ switch ($_GET['action']) {
 
 		break;
 
-
 	//performs document upload
     case 'uploadDocument':
 		$documentName = basename($_FILES['myfile']['name']);
@@ -184,7 +181,6 @@ switch ($_GET['action']) {
 
 		break;
 
-
     case 'deleteDocument':
 
 		//note - does not delete physical document
@@ -212,8 +208,6 @@ switch ($_GET['action']) {
 
 		break;
 
-
-
     case 'submitSignature':
     	//set date for proper saving
         if ((isset($_POST['signatureDate'])) && ($_POST['signatureDate'] != '')){
@@ -230,7 +224,6 @@ switch ($_GET['action']) {
  			$signature->signatureID = '';
  		}
 
-
 		$signature->signerName		= $_POST['signerName'];
 		$signature->signatureTypeID = $_POST['signatureTypeID'];
 		$signature->documentID		= $_POST['documentID'];
@@ -245,7 +238,6 @@ switch ($_GET['action']) {
 
 		break;
 
-
     case 'deleteSignature':
 
 		$signature = new Signature(new NamedArguments(array('primaryKey' => $_GET['signatureID'])));
@@ -258,7 +250,6 @@ switch ($_GET['action']) {
 		}
 
 		break;
-
 
 	//add/update expression
     case 'submitExpression':
@@ -299,15 +290,12 @@ switch ($_GET['action']) {
 				}
 			}
 
-
-
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
 
         break;
-
-
+    
     case 'deleteExpression':
 
 		$expression = new Expression(new NamedArguments(array('primaryKey' => $_GET['expressionID'])));
@@ -320,7 +308,6 @@ switch ($_GET['action']) {
 		}
 
 		break;
-
 
     case 'setProdUse':
 
@@ -366,7 +353,6 @@ switch ($_GET['action']) {
 
 		break;
 
-
      case 'submitExpressionNote':
 
 		//if note id is sent in, this is an update
@@ -410,7 +396,6 @@ switch ($_GET['action']) {
 
  		break;
 
-
      case 'deleteExpressionNote':
 
 		$expressionNote = new ExpressionNote(new NamedArguments(array('primaryKey' => $_GET['expressionNoteID'])));
@@ -423,7 +408,6 @@ switch ($_GET['action']) {
 		}
 
  		break;
-
 
      case 'submitSFXProvider':
 
@@ -446,7 +430,6 @@ switch ($_GET['action']) {
 		}
 
  		break;
-
 
      case 'deleteSFXProvider':
 
@@ -764,12 +747,7 @@ switch ($_GET['action']) {
 			} catch (Exception $e) {
 				echo $e->getMessage();
 			}
-		} 
-/*
-<select name="note[documentNoteTypeID]" id="noteDocumentNoteTypeID">
-			<option value="1">Test Type 1</option>
-			<option value="2">Test Type 2</option>			<option value="3">Test Type 3</option>			<option value="4">Test Type 4</option>			</select>
-*/		
+		} 	
 			echo '			<select id="noteDocumentNoteTypeID" name="note[documentNoteTypeID]">';
 			foreach($noteType->allAsArray() as $display) {
 				echo "			<option value='" . $display['documentNoteTypeID'] . "'>" . $display['shortName'] . "</option>";
@@ -813,7 +791,6 @@ switch ($_GET['action']) {
 		echo "</select>";
 
  		break;
-
 
 	 //new expression type being added directly on expression form - returns updated drop down list
 	 //note default type is 'internal'.  this will need to be updated by user in admin if it's decided to be used for display
@@ -922,7 +899,6 @@ switch ($_GET['action']) {
  		break;
 
 
-
      case 'submitExpressionType':
 		if ((isset($_POST['expressionTypeID'])) && ($_POST['expressionTypeID'] != '')){
  			$expressionType = new ExpressionType(new NamedArguments(array('primaryKey' => $_POST['expressionTypeID'])));
@@ -941,8 +917,6 @@ switch ($_GET['action']) {
 		}
 
  		break;
-
-
 
      case 'submitQualifier':
 		if ((isset($_POST['qualifierID'])) && ($_POST['qualifierID'] != '')){
@@ -985,8 +959,6 @@ switch ($_GET['action']) {
 
  		break;
 
-
-
      case 'deleteUser':
 
  		$loginID = $_GET['loginID'];
@@ -1003,9 +975,6 @@ switch ($_GET['action']) {
 
  		break;
 
-
-
-
      case 'deleteExpressionType':
 
  		$expressionTypeID = $_GET['expressionTypeID'];
@@ -1021,8 +990,6 @@ switch ($_GET['action']) {
 		echo "</font>";
 
  		break;
-
-
 
 	//verify file name for uploaded attachments (4th tab) aren't already being used
     case 'checkUploadAttachment':
@@ -1109,10 +1076,7 @@ switch ($_GET['action']) {
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
-
-
         break;
-
 
 	//adding the attachment file to the db - saves the URL to it only
     case 'addAttachmentFile':
@@ -1149,7 +1113,6 @@ switch ($_GET['action']) {
 
  		break;
 
-
      case 'deleteAttachmentFile':
 
  		$attachmentFile = new AttachmentFile(new NamedArguments(array('primaryKey' => $_GET['attachmentFileID'])));
@@ -1160,7 +1123,6 @@ switch ($_GET['action']) {
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
-
  		break;
 
      case 'deleteNote':
@@ -1173,7 +1135,6 @@ switch ($_GET['action']) {
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
-
  		break;
 
 
@@ -1224,7 +1185,6 @@ switch ($_GET['action']) {
 
  		break;
 
-
 	//used for autocomplete of signer name
     case 'getSigners':
 
@@ -1242,9 +1202,6 @@ switch ($_GET['action']) {
 
 		break;
 
-
-
-
 	//used for autocomplete of provider names (from organizations module)
     case 'getOrganizations':
 
@@ -1261,7 +1218,6 @@ switch ($_GET['action']) {
 		echo implode("\n", $orgArray);
 
 		break;
-
 
 	//used to verify document name isn't already being used as it's added
 	case 'getExistingDocumentName':
@@ -1305,11 +1261,9 @@ switch ($_GET['action']) {
 
 		break;
 
-
 	//used to verify organization name isn't already being used as it's added
 	case 'getExistingOrganizationName':
 		$shortName = $_GET['shortName'];
-
 
 		$license = new License();
 		$licenseArray = array();
@@ -1329,10 +1283,5 @@ switch ($_GET['action']) {
 	default:
        echo "Action " . $action . " not set up!";
        break;
-
-
 }
-
-
-
 ?>

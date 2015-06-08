@@ -62,45 +62,12 @@ $_SESSION['ref_script']=$currentPage;
 	</td>
 	</tr>
 
-
 	<input type='hidden' name='organizationID' id='organizationID' value='' />
-
-<!--	
-	<tr>
-	<td class='searchRow'><label for='organizationID'><b>Publisher/Provider</b></label>
-	<br />
-	<?php
-		$license = new License();
-		$orgArray = array();
-
-		try {
-			$orgArray = $license->getOrganizationList();
-			?>
-
-			<select name='organizationID' id='organizationID' style='width:150px' onchange='javsacript:updateSearch();'>
-			<option value=''>All</option>
-
-			<?php
-			foreach($license->getOrganizationList() as $display) {
-				if ((isset($_SESSION['license_organizationID'])) && ($_SESSION['license_organizationID'] == $display['organizationID']) && ($reset != 'Y')){
-					echo "<option value='" . $display['organizationID'] . "' selected>" . $display['name'] . "</option>";
-				}else{
-					echo "<option value='" . $display['organizationID'] . "'>" . $display['name'] . "</option>";
-				}
-			}
-			?>
-			</select>
-			<?php
-		}catch (Exception $e){
-			echo "<span style='color:red'>There was an error processing this request - please verify configuration.ini is set up for organizations correctly and the database and tables have been created.</span>";
-		}
-	?>
-
-	</td>
-	</tr>
-
--->	
-
+    <?php 
+        $license = new License();
+        $orgArray = array();
+        $orgArray = $license->getOrganizationList();
+    ?>
 	<tr>
 	<td class='searchRow'><label for='consortium'><b>Category</b></label>
 	<br />
@@ -124,35 +91,7 @@ $_SESSION['ref_script']=$currentPage;
 	</td>
 	</tr>
 
-	
 	<input type='hidden' name='statusID' id='statusID' value='' />	
-<!--
-
-	<tr>
-	<td class='searchRow'><label for='statusID'><b>Status</b></label>
-	<br />
-	<select name='statusID' id='statusID' style='width:150px' onchange='javsacript:updateSearch();'>
-	<option value='' selected></option>
-	<?php
-
-		$display = array();
-		$status = new Status();
-
-		foreach($status->allAsArray() as $display) {
-			if ((isset($_SESSION['license_statusID'])) && ($_SESSION['license_statusID'] == $display['statusID']) && ($reset != 'Y')){
-				echo "<option value='" . $display['statusID'] . "' selected>" . $display['shortName'] . "</option>";
-			}else{
-				echo "<option value='" . $display['statusID'] . "'>" . $display['shortName'] . "</option>";
-			}
-		}
-
-	?>
-	</select>
-
-	</td>
-	</tr>
-
--->
 
 	<tr>
 	<td class='searchRow'><label for='documentTypeID'><b>Document Type</b></label>
@@ -182,33 +121,6 @@ $_SESSION['ref_script']=$currentPage;
 
 	<input type='hidden' name='expressionTypeID' id='expressionTypeID' value='' />	
 
-<!--
-
-	<tr>
-	<td class='searchRow'><label for='expressionTypeID'><b>Expression Type</b></label>
-	<br />
-	<select name='expressionTypeID' id='expressionTypeID' style='width:150px'>
-	<option value='' selected></option>
-	<?php
-
-		$display = array();
-		$expressionType = new ExpressionType();
-
-		foreach($expressionType->allAsArray() as $display) {
-			if ((isset($_SESSION['license_expressionTypeID'])) && ($_SESSION['license_expressionTypeID'] == $display['expressionTypeID']) && ($reset != 'Y')){
-				echo "<option value='" . $display['expressionTypeID'] . "' selected>" . $display['shortName'] . "</option>";
-			}else{
-				echo "<option value='" . $display['expressionTypeID'] . "'>" . $display['shortName'] . "</option>";
-			}
-		}
-
-
-	?>
-	</select>
-
-	</td>
-	</tr>
--->
 	<tr id='tr_Qualifiers'>
 	<td class='searchRow'><label for='qualifierID'><b>Qualifier</b></label>
 	<br />
@@ -217,7 +129,6 @@ $_SESSION['ref_script']=$currentPage;
 	</div>
 	</td>
 	</tr>
-
 
 	<tr>
 	<td class='searchRow'><label for='searchFirstLetter'><b>Starts with</b></label>
@@ -280,13 +191,7 @@ $_SESSION['ref_script']=$currentPage;
   if (($_SESSION['license_orderBy']) && ($reset != 'Y')){
 	  echo "orderBy = \"" . $_SESSION['license_orderBy'] . "\";";
   }
-
-
+?>
 </script>
 
-
-<?php
-include 'templates/footer.php';
-?>
-
-
+<?php include 'templates/footer.php'; ?>

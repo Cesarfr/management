@@ -15,9 +15,7 @@
 **************************************************************************************************************************
 */
 
-
 $("#submitNote").click(function () {
-
   $.ajax({
 	 type:       "POST",
 	 url:        "ajax_processing.php?action=submitNote",
@@ -35,10 +33,8 @@ $("#submitNote").click(function () {
 
 function newNoteType(){
   $('#span_newNoteType').html("<input type='text' name='newNoteType' id='newNoteType' class='licenseAddInput' />  <a href='javascript:addNoteType();'>add</a>");
-
 	 //attach enter key event to new input and call add data when hit
 	 $('#span_newNoteType').keyup(function(e) {
-
 			 if(e.keyCode == 13) {
 				   addDocumentType();
 			 }
@@ -67,5 +63,3 @@ function addNoteType(){
 	 			}
  	});
 }
-
-

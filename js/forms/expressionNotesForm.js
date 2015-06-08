@@ -15,8 +15,6 @@
 **************************************************************************************************************************
 */
  
-
-
 function addExpressionNote(){
 
   $.ajax({
@@ -27,8 +25,6 @@ function addExpressionNote(){
 	 success:    function(response) {
 		updateExpressionNoteForm();
 	 }
-
-
  });
 }
 
@@ -42,8 +38,6 @@ $("#commitUpdate").click(function () {
 	 success:    function(response) {
 		updateExpressionNoteForm();
 	 }
-
-
  });
 });
 
@@ -58,13 +52,8 @@ function updateExpressionNoteForm(expressionNoteID){
 	 success:    function(html) {
 		$("#div_expressionNotesForm").html(html);
 	 }
-
-
  });
-
 }
-
-
 
 function removeExpressionNote(expressionNoteID){
 
@@ -76,13 +65,9 @@ function removeExpressionNote(expressionNoteID){
 	 success:    function(html) {
 		updateExpressionNoteForm();
 	 }
-
-
  });
 
 }
-
-
 
 function reorder(expressionNoteID, oldSeq, direction){
 
@@ -94,8 +79,5 @@ function reorder(expressionNoteID, oldSeq, direction){
 	 success:    function(html) {
 		updateExpressionNoteForm();
 	 }
-
-
  });
-
 }

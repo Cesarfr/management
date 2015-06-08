@@ -51,23 +51,16 @@ $sessionID = $util->getSessionCookie();
 				$addURL = '?service=';
 			}
 		}
-
-
 		$authURL = $util->getCORALURL() . "auth/" . $addURL . htmlentities($_SERVER['REQUEST_URI']);
 		header('Location: ' . $authURL, true);
-
 	}
-
 
 //otherwise plug into apache server variable
 }else{
 
 	//get login id from server
 	if (!isset($_SESSION['loginID']) || ($_SESSION['loginID'] == '')){
-
-
 		$varName = $config->settings->remoteAuthVariableName;
-
 		//the following code takes the remote auth variable name from the config settings and evaluates it to get the actual value from web server
 
 		//if the first character is a $ it needs to be stripped off for the eval to work
@@ -78,22 +71,12 @@ $sessionID = $util->getSessionCookie();
 
 		//use the split in case the remote login is supplied as an email address
 		list ($loginID,$restofAddr) = explode("@", $remoteAuth);
-
-
-
 		session_start();
 		$_SESSION['loginID'] = $loginID;
-
-
 	}else{
-
 		$loginID = $_SESSION['loginID'];
-
 	}
-
 }
-
-
 
 //for the licensing module we require that the user exists in the database before granting access
 //thus, setuser.php is not used
@@ -107,6 +90,4 @@ if ($loginID){
 		header('Location: not_available.php');
 	}
 }
-
-
 ?>

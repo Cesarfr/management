@@ -30,7 +30,6 @@ include 'templates/header.php';
 //set referring page
 $_SESSION['ref_script']=$currentPage;
 
-
 //determine if we should display the SFX tab - if user is admin and if configured in settings to use SFX
 $util = new Utility();
 $displaySFX = 0;
@@ -40,16 +39,11 @@ if (($user->isAdmin()) && ($util->useTermsTool())){
 
 //as long as license id is valid...
 if ($license->shortName){
-
 ?>
 
-
 <input type='hidden' name='licenseID' id='licenseID' value='<?php echo $licenseID; ?>'>
-
 <div id='div_licenseHead'>
-
 </div>
-
 </center>
 
 <input type='hidden' name='licenseID' id='licenseID' value='<?php echo $license->licenseID; ?>'>
@@ -59,7 +53,6 @@ if ($license->shortName){
 		<tr>
 			<td class="sidemenu">
 				<div class="sidemenuselected" style='position: relative; width: 91px'><a href='javascript:void(0)' class='showDocuments'>Documents</a></div>
-				<!-- <div class='sidemenuunselected'><a href='javascript:void(0)' class='showExpressions'>Expressions</a></div> -->
 				<?php if ($displaySFX == "1"){ ?><div class='sidemenuunselected'><a href='javascript:void(0)' class='showSFXProviders'>Terms Tool</a></div><?php } ?>
 				<div class='sidemenuunselected'><a href='javascript:void(0)' class='showAttachments'>Attachments</a><br />&nbsp;<span class='span_AttachmentNumber'></span></div>
 			</td>
@@ -77,8 +70,6 @@ if ($license->shortName){
 		</tr>
 	</table>
 </div>
-
-
 
 <div id ='div_displayExpressions' style='display:none;width:899px;'>
 	<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
@@ -99,7 +90,6 @@ if ($license->shortName){
 	</table>
 </div>
 
-
 <div id ='div_displaySFXProviders' style='display:none;width:899px;'>
 	<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 		<tr>
@@ -118,13 +108,11 @@ if ($license->shortName){
 	</table>
 </div>
 
-
 <div id ='div_displayAttachments' style='display:none;width:899px;'>
 	<table cellpadding="0" cellspacing="0" style="width: 100%; table-layout: fixed;">
 		<tr>
 			<td class="sidemenu">
 				<div class="sidemenuunselected"><a href='javascript:void(0)' class='showDocuments'>Documents</a></div>
-<!--				<div class='sidemenuunselected'><a href='javascript:void(0)' class='showExpressions'>Expressions</a></div> -->
 				<?php if ($displaySFX == "1"){ ?><div class='sidemenuunselected'><a href='javascript:void(0)' class='showSFXProviders'>Terms Tool</a></div><?php } ?>
 				<div class='sidemenuselected' style='position: relative; width: 91px'><a href='javascript:void(0)' class='showAttachments'>Attachments</a><br />&nbsp;<span class='span_AttachmentNumber'></span></div>
 			</td>
@@ -138,7 +126,6 @@ if ($license->shortName){
 	</table>
 </div>
 
-
 <script type="text/javascript" src="js/license.js"></script>
 
 <?php
@@ -146,4 +133,3 @@ if ($license->shortName){
 
 include 'templates/footer.php';
 ?>
-

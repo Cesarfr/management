@@ -15,10 +15,7 @@
 **************************************************************************************************************************
 */
 
-
-
 $(function(){
-
 
     //the following is to fix a bug in IE6 and IE7 that prevents the entire line from being shown in a dropdown
     $("#documentID")
@@ -28,7 +25,6 @@ $(function(){
 		      'width' : 'auto',
 		      'position' : 'absolute'
 		    }
-
 		    $(this).css(cssObj);
 	   }
 	})
@@ -43,11 +39,7 @@ $(function(){
 	    }
 	})
 
-
 });
-
-
-
 
 $("#submitExpression").click(function () {
 	$("#submitExpression").attr("disabled","disabled");
@@ -68,16 +60,13 @@ $("#submitExpression").click(function () {
 				window.parent.updateArchivedDocuments();
 				return false;
 			}
-
 		});
 	return false;
 });
 
-
 function newExpressionType(){
   $('#span_newExpressionType').html("<input type='text' name='newExpressionType' id='newExpressionType' style='width:80px;' />  <a href='javascript:addExpressionType();'>add</a>");
 }
-
 
 function addExpressionType(){
   //add expressionType to db and returns updated select box
@@ -90,15 +79,9 @@ function addExpressionType(){
  });
 }
 
-
-
-
 $("#expressionTypeID").change(function () {
 	updateQualifier();
 });
-
-
-
 
 function updateQualifier(){
       $("#div_Qualifiers").html('');
@@ -116,9 +99,5 @@ function updateQualifier(){
          		$("#div_Qualifiers").html("<input type='hidden' id='qualifierID' value='' />");
          	}
          }
-
-
      });
-
-
 }

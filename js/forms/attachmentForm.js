@@ -15,14 +15,9 @@
 **************************************************************************************************************************
 */
 
-
-
 $(function(){
 	$('.date-pick').datePicker({startDate:'01/01/1996'});
 });
-
-
-
 
 var fileName = $("#upload_attachment_button").val();
 var exists = '';
@@ -46,8 +41,6 @@ function checkUploadAttachment (file, extension){
     				$("#div_file_message").html("  <font color='red'>The attachments directory is not writable.</font>");
     				return false;
           }
-
-
 					//check if it's already been uploaded in current array
 					//note: using indexOf prototype in common.js for IE
 					 if (URLArray.indexOf(file) >= 0){
@@ -55,13 +48,9 @@ function checkUploadAttachment (file, extension){
 						exists=1;
 						return false;
 					 }
-
-
 					 exists='';
 					 return true;
 		 }
-
-
 	});
 }
 
@@ -87,15 +76,6 @@ new AjaxUpload('upload_attachment_button',
 
 	}
 });
-
-
-
-
-
-
-
-
-
 
 function removeFile(arrayLocation){
 	if (confirm("Do you really want to delete this attachment?") == true) {
@@ -137,7 +117,6 @@ $("#submitAttachment").click(function () {
 					function(data){});
 			});
 
-
 			window.parent.tb_remove();
 			window.parent.updateAttachments();
 			return false;
@@ -146,6 +125,3 @@ $("#submitAttachment").click(function () {
    });
    return false;
 });
-
-
-

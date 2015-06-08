@@ -15,7 +15,6 @@
 **************************************************************************************************************************
 */
 
-
 $(function(){
 
 	$(".sectiontoggle").click(function(e) {
@@ -42,8 +41,6 @@ $(function(){
 				}
 			 }
 		  });
-
-
 	});	
 
 
@@ -60,19 +57,13 @@ $(function(){
 				if (exists == "0"){
 					$("#licenseOrganizationID").val("");
 					$("#span_error_organizationNameResult").html("<br />Warning!  This organization will be added new.");
-
 				}else{
 					$("#licenseOrganizationID").val(exists);
 					$("#span_error_organizationNameResult").html("");
-
 				}
 			 }
 		  });
-
-
 	});	
-
-
 
 	//used for autocomplete formatting
          formatItem = function (row){ 
@@ -134,8 +125,7 @@ $(function(){
 		    }
 		}		
 	 });
- 
-	 
+    
 	//once something has been selected, change the hidden input value
 	$("#organizationName").result(function(event, data, formatted) {
 		if (data[0]){
@@ -143,8 +133,6 @@ $(function(){
 			$("#span_error_organizationNameResult").html("");
 		}
 	});
-
-
 });
 
  //attach enter key event to new input and call add data when hit
@@ -165,9 +153,7 @@ $("#submitLicense").click(function () {
 //	alert("DocumentType: " + $("#docTypeID").val());	
 //	alert("Category: " + $("#licenseConsortiumID").val());
   	doSubmitLicense();
-
 });
-
 
 function doSubmitLicense(){
   if (validateForm() === true) {
@@ -194,10 +180,8 @@ function doSubmitLicense(){
 //the following are only used when interoperability with organizations module is turned off
 function newConsortium(){
   $('#span_newConsortium').html("<input type='text' name='newConsortium' id='newConsortium' class='licenseAddInput' />  <a href='javascript:addConsortium();'>add</a>");
-
 	 //attach enter key event to new input and call add data when hit
 	 $('#span_newConsortium').keyup(function(e) {
-
 			 if(e.keyCode == 13) {
 				   addConsortium();
 			 }
@@ -228,14 +212,12 @@ function addConsortium(){
  	});
 }
 
-
 //the following are only used when interoperability with organizations module is turned off
 function newDocumentType(){
   $('#span_newDocumentType').html("<input type='text' name='newDocumentType' id='newDocumentType' class='licenseAddInput' />  <a href='javascript:addDocumentType();'>add</a>");
 
 	 //attach enter key event to new input and call add data when hit
 	 $('#span_newDocumentType').keyup(function(e) {
-
 			 if(e.keyCode == 13) {
 				   addDocumentType();
 			 }
@@ -268,10 +250,8 @@ function addDocumentType(){
 
 function newNoteType(){
   $('#span_newNoteType').html("<input type='text' name='newNoteType' id='newNoteType' class='licenseAddInput' />  <a href='javascript:addNoteType();'>add</a>");
-
 	 //attach enter key event to new input and call add data when hit
 	 $('#span_newNoteType').keyup(function(e) {
-
 			 if(e.keyCode == 13) {
 				   addDocumentType();
 			 }
@@ -301,24 +281,19 @@ function addNoteType(){
  	});
 }
 
-
 function newNoteType(){
   $('#span_newNoteType').html("<input type='text' name='newNoteType' id='newNoteType' class='licenseAddInput' />  <a href='javascript:addNoteType();'>add</a>");
-
 	 //attach enter key event to new input and call add data when hit
 	 $('#span_newNoteType').keyup(function(e) {
-
 			 if(e.keyCode == 13) {
 				   addDocumentType();
 			 }
 	 });
 }
 
-
 //validates fields
 function validateForm (){
 	myReturn=0;
-	
 	if (!validateRequired('licenseShortName','License Name is required.')) myReturn="1";
 	if (!validateRequired('licenseConsortiumID','A Category is required.')) myReturn="1";	
 //	if (!validateRequired('organizationName','Provider is required.')) myReturn="1";
@@ -332,7 +307,6 @@ function validateForm (){
 				myReturn="1";
 			}
 		}
-	
 	if (myReturn == "1"){
 		return false;
 	}else{
@@ -369,8 +343,6 @@ function checkUploadDocument (file, extension){
 				exists = "";
 			}
 		 }
-
-
 	});
 }
 
@@ -381,7 +353,6 @@ new AjaxUpload('upload_button',
 			onChange : function (file, extension){checkUploadDocument(file, extension);},
 			onComplete : function(data,response){
 				fileName=data;
-
 				if (exists == ""){
 				  var errorMessage = $(response).filter('#error');
           if (errorMessage.size() > 0) {
@@ -392,6 +363,5 @@ new AjaxUpload('upload_button',
   					$("#div_uploadFile").html("<br />");
           }
 				}
-
 		}
 });
